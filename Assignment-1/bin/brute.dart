@@ -81,8 +81,7 @@ void main() {
     print("Enter the item type (raw/manufactured/imported): ");
     late String itemType = stdin.readLineSync().toString();
 
-    Item test = Item(itemName,
-        price: itemPrice, quantity: itemQuantity, type: itemType);
+    Item test = Item(itemName, price: itemPrice, quantity: itemQuantity, type: itemType);
 
     print("\n>>>>>>>>>><<<<<<<<<<\n");
     test.showDetails();
