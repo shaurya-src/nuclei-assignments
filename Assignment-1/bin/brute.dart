@@ -84,9 +84,10 @@ void main() {
     Item test = Item(itemName,
         price: itemPrice, quantity: itemQuantity, type: itemType);
 
+    print("\n>>>>>>>>>><<<<<<<<<<\n");
     test.showDetails();
-    var salesTax = test.calculateSalesTax();
-    print("Sales tax is: $salesTax");
+    test.showPriceDetails();
+    print("\n>>>>>>>>>><<<<<<<<<<\n");
 
     print("Do you want to enter details of any other item (y/n):");
   } while (stdin.readLineSync().toString() == 'y');
