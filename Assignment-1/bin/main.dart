@@ -1,11 +1,9 @@
+import 'dart:io';
+
 enum ItemType { raw, manufactured, imported }
 
 abstract class Item {
-  String? name;
   double? price;
-  int? quantity;
-  String? type;
-
   factory Item(ItemType type) {
     switch (type) {
       case ItemType.raw:
@@ -23,6 +21,16 @@ abstract class Item {
 }
 
 class Raw implements Item {
+  double? price;
+
+  set setPrice(double price) {
+    this.price = price;
+  }
+
+  double get getPrice {
+    return price ?? 0;
+  }
+
   @override
   double calculateSalesTax() {
     double totalTax = -1;
@@ -32,6 +40,16 @@ class Raw implements Item {
 }
 
 class Manufactured implements Item {
+  double? price;
+
+  set setPrice(double price) {
+    this.price = price;
+  }
+
+  double get getPrice {
+    return price ?? 0;
+  }
+
   @override
   double calculateSalesTax() {
     double totalTax = -1;
@@ -42,6 +60,16 @@ class Manufactured implements Item {
 }
 
 class Imported implements Item {
+  double? price;
+
+  set setPrice(double price) {
+    this.price = price;
+  }
+
+  double get getPrice {
+    return price ?? 0;
+  }
+
   @override
   double calculateSalesTax() {
     double totalTax = -1;
@@ -66,5 +94,8 @@ class Imported implements Item {
 }
 
 void main() {
-  print("yo!")
+  double? price = double.parse(stdin.readLineSync().toString());
+  var ir = Item(ItemType.raw);
+  ir.price = price;
+  print(ir.calculateSalesTax());
 }
