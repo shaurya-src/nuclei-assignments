@@ -64,4 +64,10 @@ main() {
       expect(finalPrice, 132.5);
     });
   });
+
+  test('Check amount of all items', () {
+    final item = Item('Test', price: 500, quantity: 7, type: ItemType.imported);
+    double totalAmount = item.getAmountOfAllItems();
+    expect(totalAmount, 4501.875);
+  });
 }
