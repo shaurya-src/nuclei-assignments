@@ -43,4 +43,25 @@ main() {
       expect(tax, 32.5);
     });
   });
+
+  // Group to test final price
+  group('Sales Tax', () {
+    test('Check tax for raw item', () {
+      final item = Item('Test Name', price: 100, type: ItemType.raw);
+      double finalPrice = item.getFinalPrice();
+      expect(finalPrice, 112.5);
+    });
+
+    test('Check tax for manufactured item', () {
+      final item = Item('Test Name', price: 100, type: ItemType.manufactured);
+      double finalPrice = item.getFinalPrice();
+      expect(finalPrice, 114.75);
+    });
+
+    test('Check tax for imported item', () {
+      final item = Item('Test Name', price: 100, type: ItemType.imported);
+      double finalPrice = item.getFinalPrice();
+      expect(finalPrice, 132.5);
+    });
+  });
 }
