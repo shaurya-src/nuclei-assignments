@@ -5,7 +5,7 @@ class Item {
   String name;
   double price;
   int quantity;
-  var type;
+  ItemType type;
 
   /* 
   Constructor to initialize the object
