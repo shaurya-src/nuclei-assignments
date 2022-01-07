@@ -24,15 +24,42 @@ class Item {
     double totalTax = -1;
 
     switch (this.type) {
+
+      // Tax calculation for RAW items
       case "raw":
-        totalTax = 10;
+        totalTax = 0.125 * price;
         break;
+
+      // Tax calculation for MANUFACTURED items
       case "manufactured":
-        totalTax = 50;
+        double baseTax = 0.125 * price;
+        totalTax = baseTax + (0.02 * 1.125 * price);
         break;
+
+      // Tax calculation for IMPORTED items
       case "imported":
-        totalTax = 100;
+        double importDuty = 0.1 * price;
+        //
+        // not clear in the question
+        //
+        double baseTax = 0.125 * price;
+        double lumpSumAmount = price + importDuty + baseTax;
+
+        var surcharge;
+
+        // [<= not working in else if statement]
+        if (lumpSumAmount <= 100) {
+          surcharge = 5;
+        } else if (100 < lumpSumAmount && lumpSumAmount <= 200) {
+          surcharge = 10;
+        } else {
+          surcharge = 0.05 * lumpSumAmount;
+        }
+
+        totalTax = baseTax + importDuty + surcharge;
         break;
+
+      // Invalid item encountered
       default:
         throw Exception("Invalid Item Type");
     }
