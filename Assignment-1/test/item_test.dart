@@ -2,5 +2,45 @@ import 'package:test/test.dart';
 import '../lib/item.dart';
 
 main() {
-  test('Some Test Case', () {});
+  // Group to test attribute values
+  group('Item Initialisation', () {
+    test('Check name attribute', () {
+      final item = Item('Test Name', type: ItemType.raw);
+      expect(item.name, 'Test Name');
+    });
+
+    test('Check type attribute', () {
+      final item = Item('Test', type: ItemType.imported);
+      expect(item.type, ItemType.imported);
+    });
+    test('Check quantity attribute', () {
+      final item = Item('Test', quantity: 87, type: ItemType.manufactured);
+      expect(item.quantity, 87);
+    });
+    test('Check price attribute', () {
+      final item = Item('Test', type: ItemType.imported, price: 782);
+      expect(item.price, 782.00);
+    });
+  });
+
+  // Group to test calculated sales tax
+  group('Sales Tax', () {
+    test('Check tax for raw item', () {
+      final item = Item('Test Name', price: 100, type: ItemType.raw);
+      double tax = item.calculateSalesTax();
+      expect(tax, 12.5);
+    });
+
+    test('Check tax for manufactured item', () {
+      final item = Item('Test Name', price: 100, type: ItemType.manufactured);
+      double tax = item.calculateSalesTax();
+      expect(tax, 14.75);
+    });
+
+    test('Check tax for imported item', () {
+      final item = Item('Test Name', price: 100, type: ItemType.imported);
+      double tax = item.calculateSalesTax();
+      expect(tax, 32.5);
+    });
+  });
 }
