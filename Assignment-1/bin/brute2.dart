@@ -15,6 +15,10 @@ class Item {
   */
   Item(this.name, {this.price = 0, this.quantity = 1, required this.type});
 
+  // define late variables to store tax and final price
+  late double salesTax = calculateSalesTax();
+  late double finalPrice = getFinalPrice();
+
   // Function to calculate sales tax according to item type
   double calculateSalesTax() {
     double totalTax = -1;
@@ -38,12 +42,12 @@ class Item {
 
   // Function to get the final price (sales tax + item price)
   double getFinalPrice() {
-    return this.calculateSalesTax() + this.price;
+    return salesTax + price;
   }
 
   // function to calculate total price of all entities of the item
   double getAmountOfAllItems() {
-    return this.getFinalPrice() * this.quantity;
+    return finalPrice * quantity;
   }
 
   // Function to show provided details of the item
@@ -61,7 +65,7 @@ class Item {
 
   // Function to show the calculated tax per item
   void showTaxDetails() {
-    print("Sales Tax liability (per item): $this.calculateSalesTax()");
+    print("Sales Tax liability (per item): $salesTax \n");
   }
 
   // Function to get the final details of the item
@@ -70,19 +74,20 @@ class Item {
     >>>>>>>>>><<<<<<<<<<
     Final Details:
     
-    Item Name - $this.name.toString()
-    Item Price - $this.price
-    Sales Tax - $this.calculateSaleTax()
-    Final Price - $this.getFinalPrice()
+    Item Name - $name
+    Item Price - $price
+    Sales Tax - $salesTax
+    Final Price - $finalPrice
 
     >>>>>>>>>><<<<<<<<<<
     ''');
   }
 }
 
+// helper function to throw exception when value is less than or equal to zero
 void isGreaterThanZero(num val) {
   if (val <= 0) {
-    throw Exception("Value must be greater or equal to zero.");
+    throw Exception("Value must be greater than or equal to zero.");
   }
 }
 
@@ -90,7 +95,10 @@ void main() {
   List<String> possibleTypes = ["raw", "manufactured", "imported"];
 
   // Continue taking inputs as long as user enters y/Y when asked.
+
   do {
+    // ############################################
+
     stdout.write("Enter the item name:\t");
     String itemName = stdin.readLineSync().toString();
 
@@ -128,10 +136,21 @@ void main() {
       errorFlag = true;
     }
 
+    // ############################################
+
+    // Check if any error occcured while taking input
     if (!errorFlag) {
+      // Initialize item when no error is encounterd
       Item test = Item(itemName, price: itemPrice, quantity: itemQuantity, type: itemType);
+
+      // Check different outputs for debugging
       test.showItemDetails();
+      test.showTaxDetails();
+
+      // Output the required details
+      test.showFinalDetails();
     } else {
+      // If error encountered, warn the user and promt to try again.
       print("Error occured! Please try again.");
     }
 
