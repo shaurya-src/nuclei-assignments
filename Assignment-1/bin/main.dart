@@ -8,19 +8,36 @@ void isGreaterThanZero(num val) {
   }
 }
 
+// helper function to check if given string is a number
+bool isNumeric(String s) {
+  return double.tryParse(s) != null;
+}
+
 void main() {
   // Continue taking inputs as long as user enters y/Y when asked.
 
   do {
     // ############################################
 
-    stdout.write("Enter the item name:\t");
-    String itemName = stdin.readLineSync().toString();
-
     double itemPrice = -1;
     int itemQuantity = -1;
     var itemType;
     bool errorFlag = false;
+
+    stdout.write("Enter the item name:\t");
+    String itemName = stdin.readLineSync().toString();
+    try {
+      if (itemName.isEmpty) {
+        throw Exception("Item name not found!");
+      }
+
+      if (isNumeric(itemName)) {
+        throw Exception("Nummeric value not allowed for item name!");
+      }
+    } catch (error) {
+      print("$error");
+      errorFlag = true;
+    }
 
     stdout.write("Enter the item price:\t");
     try {
