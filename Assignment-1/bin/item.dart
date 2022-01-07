@@ -16,47 +16,47 @@ class Item {
   Item(this.name, {this.price = 0, this.quantity = 1, required this.type});
 
   // define late variables to store tax and final price
-  late double salesTax = calculateSalesTax();
-  late double finalPrice = getFinalPrice();
+  late double _salesTax = calculateSalesTax();
+  late double _finalPrice = getFinalPrice();
 
   // Function to calculate sales tax according to item type
   double calculateSalesTax() {
-    double totalTax = -1;
+    double _totalTax = -1;
 
     switch (this.type) {
 
       // Tax calculation for RAW items
       case ItemType.raw:
-        totalTax = 0.125 * price;
+        _totalTax = 0.125 * price;
         break;
 
       // Tax calculation for MANUFACTURED items
       case ItemType.manufactured:
-        double baseTax = 0.125 * price;
-        totalTax = baseTax + (0.02 * 1.125 * price);
+        double _baseTax = 0.125 * price;
+        _totalTax = _baseTax + (0.02 * 1.125 * price);
         break;
 
       // Tax calculation for IMPORTED items
       case ItemType.imported:
-        double importDuty = 0.1 * price;
+        double _importDuty = 0.1 * price;
         //
         // not clear in the question
         //
-        double baseTax = 0.125 * price;
-        double lumpSumAmount = price + importDuty + baseTax;
+        double _baseTax = 0.125 * price;
+        double _lumpSumAmount = price + _importDuty + _baseTax;
 
-        var surcharge;
+        var _surcharge;
 
         // [<= not working in else if statement]
-        if (lumpSumAmount <= 100) {
-          surcharge = 5;
-        } else if (100 < lumpSumAmount && lumpSumAmount <= 200) {
-          surcharge = 10;
+        if (_lumpSumAmount <= 100) {
+          _surcharge = 5;
+        } else if (100 < _lumpSumAmount && _lumpSumAmount <= 200) {
+          _surcharge = 10;
         } else {
-          surcharge = 0.05 * lumpSumAmount;
+          _surcharge = 0.05 * _lumpSumAmount;
         }
 
-        totalTax = baseTax + importDuty + surcharge;
+        _totalTax = _baseTax + _importDuty + _surcharge;
         break;
 
       // Invalid item encountered
@@ -64,17 +64,17 @@ class Item {
         throw Exception("Invalid Item Type");
     }
 
-    return totalTax;
+    return _totalTax;
   }
 
   // Function to get the final price (sales tax + item price)
   double getFinalPrice() {
-    return salesTax + price;
+    return _salesTax + price;
   }
 
   // function to calculate total price of all entities of the item
   double getAmountOfAllItems() {
-    return finalPrice * quantity;
+    return _finalPrice * quantity;
   }
 
   // Function to show provided details of the item
@@ -92,7 +92,7 @@ class Item {
 
   // Function to show the calculated tax per item
   void showTaxDetails() {
-    print("Sales Tax liability (per item): $salesTax \n");
+    print("Sales Tax liability (per item): $_salesTax \n");
   }
 
   // Function to get the final details of the item
@@ -103,8 +103,8 @@ class Item {
     
     Item Name - $name
     Item Price - $price
-    Sales Tax - $salesTax
-    Final Price - $finalPrice
+    Sales Tax - $_salesTax
+    Final Price - $_finalPrice
 
     >>>>>>>>>><<<<<<<<<<
     ''');
