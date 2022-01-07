@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 enum ItemType { raw, manufactured, imported }
 
 class Item {

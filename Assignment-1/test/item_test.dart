@@ -1,1 +1,6 @@
-// TODO 1: Write test cases for the assignment
+import 'package:test/test.dart';
+import '../bin/item.dart';
+
+main() {
+  test('Some Test Case', () {});
+}
