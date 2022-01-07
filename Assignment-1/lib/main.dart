@@ -19,8 +19,8 @@ void main() {
   do {
     // ############################################
 
-    double itemPrice = -1;
-    int itemQuantity = -1;
+    double? itemPrice;
+    int? itemQuantity;
     var itemType;
     bool errorFlag = false;
 
@@ -32,7 +32,7 @@ void main() {
       }
 
       if (isNumeric(itemName)) {
-        throw Exception("Nummeric value not allowed for item name!");
+        throw Exception("Numeric value not allowed for item name!");
       }
     } catch (error) {
       print("$error");
@@ -73,7 +73,7 @@ void main() {
     // Check if any error occcured while taking input
     if (!errorFlag) {
       // Initialize item when no error is encounterd
-      Item test = Item(itemName, price: itemPrice, quantity: itemQuantity, type: itemType);
+      Item test = Item(itemName, price: itemPrice ?? 0.0, quantity: itemQuantity ?? 0, type: itemType);
 
       // Check different outputs for debugging
       test.showItemDetails();
