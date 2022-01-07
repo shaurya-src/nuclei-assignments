@@ -9,8 +9,6 @@ void isGreaterThanZero(num val) {
 }
 
 void main() {
-  List<String> possibleTypes = ["raw", "manufactured", "imported"];
-
   // Continue taking inputs as long as user enters y/Y when asked.
 
   do {
@@ -21,6 +19,7 @@ void main() {
 
     double itemPrice = -1;
     int itemQuantity = -1;
+    var itemType;
     bool errorFlag = false;
 
     stdout.write("Enter the item price:\t");
@@ -42,14 +41,13 @@ void main() {
       errorFlag = true;
     }
 
-    stdout.write("Enter the item type (raw/manufactured/imported):\t");
-    String itemType = stdin.readLineSync().toString().toLowerCase();
+    stdout.write("Select the item type (1. raw | 2. manufactured | 3. imported):\t");
     try {
-      if (!possibleTypes.contains(itemType)) {
-        throw Exception("Invalid Item Type.");
-      }
+      int typeChoice = int.parse(stdin.readLineSync().toString());
+      itemType = ItemType.values[typeChoice - 1];
     } catch (error) {
-      print("Invalid Item Type.");
+      print("Error: Choose item type from {1, 2, or 3}");
+      print("$error");
       errorFlag = true;
     }
 

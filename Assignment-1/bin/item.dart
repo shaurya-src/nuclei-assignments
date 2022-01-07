@@ -1,9 +1,11 @@
+enum ItemType { raw, manufactured, imported }
+
 class Item {
   // Define attributes of the Item Class
   String name;
   double price;
   int quantity;
-  String type;
+  var type;
 
   /* 
   Constructor to initialize the object
@@ -24,18 +26,18 @@ class Item {
     switch (this.type) {
 
       // Tax calculation for RAW items
-      case "raw":
+      case ItemType.raw:
         totalTax = 0.125 * price;
         break;
 
       // Tax calculation for MANUFACTURED items
-      case "manufactured":
+      case ItemType.manufactured:
         double baseTax = 0.125 * price;
         totalTax = baseTax + (0.02 * 1.125 * price);
         break;
 
       // Tax calculation for IMPORTED items
-      case "imported":
+      case ItemType.imported:
         double importDuty = 0.1 * price;
         //
         // not clear in the question
