@@ -1,5 +1,3 @@
-import 'dart:io';
-
 class Item {
   // Define attributes of the Item Class
   String name;
@@ -109,78 +107,4 @@ class Item {
     >>>>>>>>>><<<<<<<<<<
     ''');
   }
-}
-
-// helper function to throw exception when value is less than or equal to zero
-void isGreaterThanZero(num val) {
-  if (val <= 0) {
-    throw Exception("Value must be greater than zero.");
-  }
-}
-
-void main() {
-  List<String> possibleTypes = ["raw", "manufactured", "imported"];
-
-  // Continue taking inputs as long as user enters y/Y when asked.
-
-  do {
-    // ############################################
-
-    stdout.write("Enter the item name:\t");
-    String itemName = stdin.readLineSync().toString();
-
-    double itemPrice = -1;
-    int itemQuantity = -1;
-    bool errorFlag = false;
-
-    stdout.write("Enter the item price:\t");
-    try {
-      itemPrice = double.parse(stdin.readLineSync().toString());
-      isGreaterThanZero(itemPrice);
-    } catch (error) {
-      // if we provide other data type or a negative value
-      print("ItemPrice - $error");
-      errorFlag = true;
-    }
-
-    stdout.write("Enter the item quantity:\t");
-    try {
-      itemQuantity = int.parse(stdin.readLineSync().toString());
-      isGreaterThanZero(itemQuantity);
-    } catch (error) {
-      print("ItemQuantity - $error");
-      errorFlag = true;
-    }
-
-    stdout.write("Enter the item type (raw/manufactured/imported):\t");
-    String itemType = stdin.readLineSync().toString().toLowerCase();
-    try {
-      if (!possibleTypes.contains(itemType)) {
-        throw Exception("Invalid Item Type.");
-      }
-    } catch (error) {
-      print("Invalid Item Type.");
-      errorFlag = true;
-    }
-
-    // ############################################
-
-    // Check if any error occcured while taking input
-    if (!errorFlag) {
-      // Initialize item when no error is encounterd
-      Item test = Item(itemName, price: itemPrice, quantity: itemQuantity, type: itemType);
-
-      // Check different outputs for debugging
-      test.showItemDetails();
-      test.showTaxDetails();
-
-      // Output the required details
-      test.showFinalDetails();
-    } else {
-      // If error encountered, warn the user and promt to try again.
-      print("Error occured! Please try again.");
-    }
-
-    stdout.write("Do you want to enter details of any other item (y/n):\t");
-  } while (stdin.readLineSync().toString().toLowerCase() == 'y');
 }
