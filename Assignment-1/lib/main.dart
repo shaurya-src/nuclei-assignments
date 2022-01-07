@@ -20,7 +20,7 @@ void main() {
         throw Exception("Item name not found!");
       }
 
-      if (isNumeric(itemName)) {
+      if (Util.isNumeric(itemName)) {
         throw Exception("Numeric value not allowed for item name!");
       }
     } catch (error) {
@@ -31,7 +31,7 @@ void main() {
     stdout.write("Enter the item price:\t");
     try {
       itemPrice = double.parse(stdin.readLineSync().toString());
-      isGreaterThanZero(itemPrice);
+      Util.isGreaterThanZero(itemPrice);
     } catch (error) {
       // if we provide other data type or a negative value
       print("ItemPrice - $error");
@@ -41,7 +41,7 @@ void main() {
     stdout.write("Enter the item quantity:\t");
     try {
       itemQuantity = int.parse(stdin.readLineSync().toString());
-      isGreaterThanZero(itemQuantity);
+      Util.isGreaterThanZero(itemQuantity);
     } catch (error) {
       print("ItemQuantity - $error");
       errorFlag = true;
