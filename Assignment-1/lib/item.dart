@@ -21,20 +21,16 @@ class Item {
 
   // Function to calculate sales tax according to item type
   double calculateSalesTax() {
-    double _totalTax = -1;
-
     switch (this.type) {
 
       // Tax calculation for RAW items
       case ItemType.raw:
-        _totalTax = 0.125 * price;
-        break;
+        return 0.125 * price;
 
       // Tax calculation for MANUFACTURED items
       case ItemType.manufactured:
         double _baseTax = 0.125 * price;
-        _totalTax = _baseTax + (0.02 * 1.125 * price);
-        break;
+        return _baseTax + (0.02 * 1.125 * price);
 
       // Tax calculation for IMPORTED items
       case ItemType.imported:
@@ -56,15 +52,12 @@ class Item {
           _surcharge = 0.05 * _lumpSumAmount;
         }
 
-        _totalTax = _baseTax + _importDuty + _surcharge;
-        break;
+        return _baseTax + _importDuty + _surcharge;
 
       // Invalid item encountered
       default:
         throw Exception("Invalid Item Type");
     }
-
-    return _totalTax;
   }
 
   // Function to get the final price (sales tax + item price)
