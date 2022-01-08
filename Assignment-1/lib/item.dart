@@ -2,10 +2,10 @@ enum ItemType { raw, manufactured, imported }
 
 class Item {
   // Define attributes of the Item Class
-  String name;
-  double price;
-  int quantity;
-  ItemType type;
+  final String name;
+  final double price;
+  final int quantity;
+  final ItemType type;
 
   /* 
   Constructor to initialize the object
