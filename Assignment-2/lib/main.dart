@@ -53,4 +53,7 @@ Please select an option:
   } catch (error) {
     print("$error");
   }
+
+  var test = User("Test", 12, "Mumbai", 17, ["A", "B", "C", "D"]);
+  test.showUserDetails();
 }
