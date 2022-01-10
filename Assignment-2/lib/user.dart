@@ -18,15 +18,10 @@ class User {
   }
 
   void showUserDetails() {
-    print('''\n
->>>>>>>>>><<<<<<<<<<   
-Name: $name
-Age: $age
-Address: $address
-Roll Number: $rollNumber
-Courses: $courses
->>>>>>>>>><<<<<<<<<<
-    ''');
+    print("__________________________________________________________");
+    print("Name \t Roll Number \t Age \t Address \t Courses");
+    print("__________________________________________________________");
+    print("$name \t $rollNumber \t\t $age \t $address \t ${courses.join(',')}");
   }
 
   void showAllUsersInAscending() {}
