@@ -73,14 +73,33 @@ void main() {
     // ############################################
 
     // Initialize item when no error is encounterd
-    Item test = Item(itemName, price: itemPrice ?? 0.0, quantity: itemQuantity ?? 0, type: itemType);
+    switch (itemType) {
+      case ItemType.raw:
+        Raw test = Raw(itemName, itemPrice ?? 0.0, itemQuantity ?? 0, itemType);
+        test.showItemDetails();
+        test.showTaxDetails();
 
-    // Check different outputs for debugging
-    test.showItemDetails();
-    test.showTaxDetails();
+        // Output the required details
+        test.showFinalDetails();
+        break;
 
-    // Output the required details
-    test.showFinalDetails();
+      case ItemType.manufactured:
+        Manufactured test = Manufactured(itemName, itemPrice ?? 0.0, itemQuantity ?? 0, itemType);
+        test.showItemDetails();
+        test.showTaxDetails();
+        test.showFinalDetails();
+        break;
+      case ItemType.imported:
+        Imported test = Imported(itemName, itemPrice ?? 0.0, itemQuantity ?? 0, itemType);
+        test.showItemDetails();
+        test.showTaxDetails();
+        test.showFinalDetails();
+        break;
+      default:
+        throw Exception("Invalid Item type encountered!");
+    }
+
+    // Item test = Item(itemName, price: itemPrice ?? 0.0, quantity: itemQuantity ?? 0, type: itemType);
 
     stdout.write("Do you want to enter details of any other item (y/n):\t");
   } while (stdin.readLineSync().toString().toLowerCase() == 'y');

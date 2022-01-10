@@ -20,45 +20,7 @@ class Item {
   late double _finalPrice = getFinalPrice();
 
   // Function to calculate sales tax according to item type
-  double calculateSalesTax() {
-    switch (this.type) {
-
-      // Tax calculation for RAW items
-      case ItemType.raw:
-        return 0.125 * price;
-
-      // Tax calculation for MANUFACTURED items
-      case ItemType.manufactured:
-        double _baseTax = 0.125 * price;
-        return _baseTax + (0.02 * 1.125 * price);
-
-      // Tax calculation for IMPORTED items
-      case ItemType.imported:
-        double _importDuty = 0.1 * price;
-        //
-        // not clear in the question
-        //
-        double _baseTax = 0.125 * price;
-        double _lumpSumAmount = price + _importDuty + _baseTax;
-
-        var _surcharge;
-
-        // [<= not working in else if statement]
-        if (_lumpSumAmount <= 100) {
-          _surcharge = 5;
-        } else if (100 < _lumpSumAmount && _lumpSumAmount <= 200) {
-          _surcharge = 10;
-        } else {
-          _surcharge = 0.05 * _lumpSumAmount;
-        }
-
-        return _baseTax + _importDuty + _surcharge;
-
-      // Invalid item encountered
-      default:
-        throw Exception("Invalid Item Type");
-    }
-  }
+  calculateSalesTax() {}
 
   // Function to get the final price (sales tax + item price)
   double getFinalPrice() {
@@ -101,5 +63,51 @@ class Item {
 
     >>>>>>>>>><<<<<<<<<<
     ''');
+  }
+}
+
+// Child class for Raw items
+class Raw extends Item {
+  Raw(String name, double price, int quantity, ItemType type) : super(name, price: price, quantity: quantity, type: type);
+
+  @override
+  double calculateSalesTax() {
+    return 0.125 * price;
+  }
+}
+
+//Child class for Manufactured items
+class Manufactured extends Item {
+  Manufactured(String name, double price, int quantity, ItemType type) : super(name, price: price, quantity: quantity, type: type);
+
+  @override
+  double calculateSalesTax() {
+    double _baseTax = 0.125 * price;
+    return _baseTax + (0.02 * 1.125 * price);
+  }
+}
+
+// Child class for Imported items
+class Imported extends Item {
+  Imported(String name, double price, int quantity, ItemType type) : super(name, price: price, quantity: quantity, type: type);
+
+  @override
+  double calculateSalesTax() {
+    double _importDuty = 0.1 * price;
+    double _baseTax = 0.125 * price;
+    double _lumpSumAmount = price + _importDuty + _baseTax;
+
+    var _surcharge;
+
+    // [<= not working in else if statement]
+    if (_lumpSumAmount <= 100) {
+      _surcharge = 5;
+    } else if (100 < _lumpSumAmount && _lumpSumAmount <= 200) {
+      _surcharge = 10;
+    } else {
+      _surcharge = 0.05 * _lumpSumAmount;
+    }
+
+    return _baseTax + _importDuty + _surcharge;
   }
 }
