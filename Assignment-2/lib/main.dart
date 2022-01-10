@@ -54,11 +54,15 @@ Please select an option:
     print("$error");
   }
 
-  var test = User("Test", 12, "Mumbai", 17, ["A", "B", "G", "F"]);
+  var test = User("Amit", 12, "Chennai", 17, ["A", "B", "E", "F"]);
+  var test1 = User("Rahul", 26, "Mumbai", 19, ["B", "E", "F", "D", "C"]);
+  var test2 = User("Max", 19, "Delhi", 12, ["E", "F", "A", "B"]);
   try {
     Util.verifyCourses(test.courses);
     test.showUserDetails();
   } catch (error) {
     print(error);
   }
+
+  print(User.users);
 }

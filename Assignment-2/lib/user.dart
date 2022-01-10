@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 class User {
   // define attributes of the User class
   final String name;
@@ -7,7 +9,7 @@ class User {
   final List<String> courses;
 
   // Data structure to store students
-  static Map users = {};
+  static SplayTreeMap users = SplayTreeMap();
 
   // Constant constructur to initialize a User object
   // All the arguments are mandatory
@@ -26,4 +28,8 @@ Courses: $courses
 >>>>>>>>>><<<<<<<<<<
     ''');
   }
+
+  void showAllUsersInAscending() {}
+
+  void showAllUsersInDescending() {}
 }
