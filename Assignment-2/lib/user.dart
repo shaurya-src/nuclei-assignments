@@ -7,7 +7,7 @@ class User {
   final List<String> courses;
 
   // Constant constructur to initialize a User object
-  // Only the arguments are mandatory
+  // All the arguments are mandatory
   const User(this.name, this.age, this.address, this.rollNumber, this.courses);
 
   void showUserDetails() {
