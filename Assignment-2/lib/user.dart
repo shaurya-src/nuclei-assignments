@@ -6,9 +6,14 @@ class User {
   final int rollNumber;
   final List<String> courses;
 
+  // Data structure to store students
+  static Map users = {};
+
   // Constant constructur to initialize a User object
   // All the arguments are mandatory
-  const User(this.name, this.age, this.address, this.rollNumber, this.courses);
+  User(this.name, this.age, this.address, this.rollNumber, this.courses) {
+    users[rollNumber] = [name, age, address, courses];
+  }
 
   void showUserDetails() {
     print('''\n
