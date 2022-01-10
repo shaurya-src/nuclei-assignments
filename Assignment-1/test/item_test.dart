@@ -26,19 +26,19 @@ main() {
   // Group to test calculated sales tax
   group('Sales Tax', () {
     test('Check tax for raw item', () {
-      final item = Item('Test Name', price: 100, type: ItemType.raw);
+      final item = Raw('Test Name', 100, 1, ItemType.raw);
       double tax = item.calculateSalesTax();
       expect(tax, 12.5);
     });
 
     test('Check tax for manufactured item', () {
-      final item = Item('Test Name', price: 100, type: ItemType.manufactured);
+      final item = Manufactured('Test Name', 100, 1, ItemType.manufactured);
       double tax = item.calculateSalesTax();
       expect(tax, 14.75);
     });
 
     test('Check tax for imported item', () {
-      final item = Item('Test Name', price: 100, type: ItemType.imported);
+      final item = Imported('Test Name', 100, 1, ItemType.imported);
       double tax = item.calculateSalesTax();
       expect(tax, 32.5);
     });
@@ -47,26 +47,26 @@ main() {
   // Group to test final price
   group('Final Price', () {
     test('Check final price for raw item', () {
-      final item = Item('Test Name', price: 100, type: ItemType.raw);
+      final item = Raw('Test Name', 100, 3, ItemType.raw);
       double finalPrice = item.getFinalPrice();
       expect(finalPrice, 112.5);
     });
 
     test('Check final price for manufactured item', () {
-      final item = Item('Test Name', price: 100, type: ItemType.manufactured);
+      final item = Manufactured('Test Name', 100, 3, ItemType.manufactured);
       double finalPrice = item.getFinalPrice();
       expect(finalPrice, 114.75);
     });
 
     test('Check final price for imported item', () {
-      final item = Item('Test Name', price: 100, type: ItemType.imported);
+      final item = Imported('Test Name', 100, 2, ItemType.imported);
       double finalPrice = item.getFinalPrice();
       expect(finalPrice, 132.5);
     });
   });
 
   test('Check amount of all items', () {
-    final item = Item('Test', price: 500, quantity: 7, type: ItemType.imported);
+    final item = Imported('Test', 500, 7, ItemType.imported);
     double totalAmount = item.getAmountOfAllItems();
     expect(totalAmount, 4501.875);
   });
