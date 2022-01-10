@@ -72,21 +72,15 @@ void main() {
 
     // ############################################
 
-    // Check if any error occcured while taking input
-    if (!errorFlag) {
-      // Initialize item when no error is encounterd
-      Item test = Item(itemName, price: itemPrice ?? 0.0, quantity: itemQuantity ?? 0, type: itemType);
+    // Initialize item when no error is encounterd
+    Item test = Item(itemName, price: itemPrice ?? 0.0, quantity: itemQuantity ?? 0, type: itemType);
 
-      // Check different outputs for debugging
-      test.showItemDetails();
-      test.showTaxDetails();
+    // Check different outputs for debugging
+    test.showItemDetails();
+    test.showTaxDetails();
 
-      // Output the required details
-      test.showFinalDetails();
-    } else {
-      // If error encountered, warn the user and promt to try again.
-      print("Error occured! Please try again.");
-    }
+    // Output the required details
+    test.showFinalDetails();
 
     stdout.write("Do you want to enter details of any other item (y/n):\t");
   } while (stdin.readLineSync().toString().toLowerCase() == 'y');
