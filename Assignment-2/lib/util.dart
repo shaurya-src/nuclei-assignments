@@ -18,10 +18,7 @@ class Util {
 
   // Function to check if roll number already exists
   static bool isRollNumberAlreadyPresent(int rollNumber) {
-    if (User.registeredRollNumbers.contains(rollNumber)) {
-      throw Exception("Roll number already present! Please try again.");
-    }
-    return true;
+    return User.registeredRollNumbers.contains(rollNumber);
   }
 
   // Function to check if given string is numeric
@@ -31,9 +28,6 @@ class Util {
 
   // Function to check if number is greater than zero
   static bool isGreaterThanZero(num number) {
-    if (number <= 0) {
-      throw Exception("Value must be greater than zero!");
-    }
-    return true;
+    return number > 0;
   }
 }
