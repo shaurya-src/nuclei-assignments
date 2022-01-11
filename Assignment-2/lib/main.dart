@@ -7,7 +7,7 @@ void addUser() {
   int? age;
   String address;
   int? rollNumber;
-  String coursesString;
+  List<String>? courses;
   bool error = false;
 
   // Input user's Full Name
@@ -90,11 +90,40 @@ void addUser() {
   } while (error);
 
   // Input user's courses
-  // do {
-  //   stdout.write("Enter the courses:   ");
-  // } while (error);
+  do {
+    stdout.write("Enter the courses (seperated by ','):   ");
+    String coursesString = stdin.readLineSync().toString();
+    try {
+      error = false;
+      // Check for empty and numeric strings
+      if (coursesString.isEmpty || Util.isNumeric(coursesString)) {
+        error = true;
+        throw Exception("Invalid courses. Please try again.");
+      } else {
+        courses = coursesString.split(',');
 
-  User test = User(name, age ?? 0, address, rollNumber ?? 0, ['A', 'B', 'C', 'D']);
+        if (courses.length < 4) {
+          error = true;
+          throw Exception("Please select atleast 4 courses.");
+        }
+
+        // Convert all elements to uppercase
+        courses = courses.map((course) => course.trim().toUpperCase()).toList();
+        print(courses);
+
+        // Verify if all the courses are valid
+        if (!Util.verifyCourses(courses)) {
+          error = true;
+          throw Exception("Invalid course(s) selected. Please choose from ['A', 'B', 'C', 'D', 'E', 'F'].");
+        }
+      }
+    } catch (exception) {
+      print(exception);
+    }
+  } while (error);
+
+  // Make user object from the input data
+  User(name, age ?? 0, address, rollNumber ?? 0, courses ?? []);
 }
 
 void displayUser() {

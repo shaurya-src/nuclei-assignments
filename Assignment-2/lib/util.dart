@@ -7,6 +7,8 @@ class Util {
     for (String course in courses) {
       if (!allowed.contains(course)) {
         return false;
+      } else {
+        allowed.remove(course);
       }
     }
     return true;
