@@ -3,7 +3,25 @@ import 'user.dart';
 import 'util.dart';
 
 void addUser() {
-  print("yo");
+  // Input user's Full Name
+  do {
+    stdout.write("Enter the full name:   ");
+  } while (false);
+
+  // Input user's Age
+  do {
+    stdout.write("Enter the age:   ");
+  } while (false);
+
+  // Input user's Address
+  do {
+    stdout.write("Enter the address:   ");
+  } while (false);
+
+  // Input user's Roll Number
+  do {
+    stdout.write("Enter the roll number:   ");
+  } while (false);
 }
 
 void displayUser() {

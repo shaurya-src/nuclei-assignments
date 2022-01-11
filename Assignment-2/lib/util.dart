@@ -23,4 +23,17 @@ class Util {
     }
     return true;
   }
+
+  // Function to check if given string is numeric
+  static bool isNumeric(String s) {
+    return double.tryParse(s) != null;
+  }
+
+  // Function to check if number is greater than zero
+  static bool isGreaterThanZero(num number) {
+    if (number <= 0) {
+      throw Exception("Value must be greater than zero!");
+    }
+    return true;
+  }
 }
