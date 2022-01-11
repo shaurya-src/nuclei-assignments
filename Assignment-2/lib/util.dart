@@ -18,7 +18,7 @@ class Util {
 
   // Function to check if roll number already exists
   static bool isRollNumberAlreadyPresent(int rollNumber) {
-    if (User.users.containsKey(rollNumber)) {
+    if (User.registeredRollNumbers.contains(rollNumber)) {
       throw Exception("Roll number already present! Please try again.");
     }
     return true;
