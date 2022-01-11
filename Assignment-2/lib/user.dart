@@ -21,6 +21,18 @@ class User {
     registeredUsers.sort((a, b) => a.name.compareTo(b.name));
   }
 
+  // From JSON to User object
+  User.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        age = json['age'],
+        address = json['address'],
+        rollNumber = json['rollNumber'],
+        // By default: dynamic list. Using cast to get List<String>
+        courses = json['courses'].cast<String>();
+
+  // From User object to JSON
+  Map<String, dynamic> toJson() => {'name': name, 'age': age, 'address': address, 'rollNumber': rollNumber, 'courses': courses};
+
   void showUserDetails() {
     print("__________________________________________________________");
     print("Name \t Roll Number \t Age \t Address \t Courses");

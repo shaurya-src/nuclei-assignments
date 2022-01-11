@@ -170,8 +170,12 @@ void deleteUser() {
   }
 }
 
-void saveUser() {
-  print("yo");
+void loadUsers() {
+  // Function to load Users from memory
+}
+
+void saveUsers() {
+  // Function to save Users to memory
 }
 
 void main() {
@@ -205,6 +209,7 @@ Please select an option:
           deleteUser();
           break;
         case 4:
+          saveUsers();
           break;
         case 5:
           noExit = false;
