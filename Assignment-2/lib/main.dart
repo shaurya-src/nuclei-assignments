@@ -109,7 +109,6 @@ void addUser() {
 
         // Convert all elements to uppercase
         courses = courses.map((course) => course.trim().toUpperCase()).toList();
-        print(courses);
 
         // Verify if all the courses are valid
         if (!Util.verifyCourses(courses)) {
@@ -157,7 +156,18 @@ void displayUser() {
 }
 
 void deleteUser() {
-  print("yo");
+  int rollNumberToDelete;
+  stdout.write("\nEnter the Roll Number of user to delte:   ");
+  try {
+    rollNumberToDelete = int.parse(stdin.readLineSync().toString());
+    if (User.deleteUser(rollNumberToDelete)) {
+      print("User with Roll Number \"$rollNumberToDelete\" deleted!");
+    } else {
+      throw Exception("Failed to delete user.");
+    }
+  } catch (exception) {
+    print("Invalid Roll Number. Please try again!");
+  }
 }
 
 void saveUser() {
@@ -192,6 +202,7 @@ Please select an option:
           displayUser();
           break;
         case 3:
+          deleteUser();
           break;
         case 4:
           break;

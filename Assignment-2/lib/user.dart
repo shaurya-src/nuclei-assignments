@@ -46,4 +46,17 @@ class User {
       print("${user.name} \t ${user.rollNumber} \t\t ${user.age} \t ${user.address} \t ${user.courses.join(',')}");
     }
   }
+
+  static bool deleteUser(int rollNumber) {
+    if (registeredRollNumbers.contains(rollNumber)) {
+      for (User user in registeredUsers) {
+        if (user.rollNumber == rollNumber) {
+          registeredUsers.remove(user);
+        }
+      }
+    } else {
+      return false;
+    }
+    return true;
+  }
 }
