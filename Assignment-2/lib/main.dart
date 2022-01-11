@@ -57,6 +57,10 @@ Please select an option:
   var test = User("Amit", 12, "Chennai", 17, ["A", "B", "E", "F"]);
   var test1 = User("Rahul", 26, "Mumbai", 19, ["B", "E", "F", "D", "C"]);
   var test2 = User("Max", 19, "Delhi", 12, ["E", "F", "A", "B"]);
+  var test3 = User("Zyan", 19, "Delhi", 12, ["E", "F", "A", "B"]);
+  var test4 = User("Aam", 19, "Delhi", 17, ["E", "F", "A", "B"]);
+  var test5 = User("Aam", 19, "Delhi", 13, ["E", "F", "A", "B"]);
+
   try {
     Util.verifyCourses(test.courses);
     test.showUserDetails();
@@ -64,5 +68,9 @@ Please select an option:
     print(error);
   }
 
-  print(User.users);
+  // print(User.users);
+  // print(User.users[1].name);
+  test.showAllUsersInAscending();
+  print("_____________________");
+  test.showAllUsersInDescending();
 }
