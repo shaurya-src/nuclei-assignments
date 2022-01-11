@@ -190,6 +190,12 @@ void loadUsers() async {
 
 void saveUsers() {
   // Function to save Users to memory
+  File outputFile = File('data/userData.json');
+  outputFile.createSync();
+  for (User user in User.registeredUsers) {
+    String json = jsonEncode(user);
+    outputFile.writeAsStringSync(json, mode: FileMode.append);
+  }
 }
 
 void main() {
