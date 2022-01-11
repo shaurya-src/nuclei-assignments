@@ -127,7 +127,33 @@ void addUser() {
 }
 
 void displayUser() {
-  print("yo");
+  int orderChoice;
+  bool error = false;
+
+  // Take a valid input for choice
+  do {
+    error = false;
+    print("\nSelect the order: ");
+    print("1. Ascending");
+    print("2. Descending");
+    stdout.write("Enter your choice:  ");
+    try {
+      orderChoice = int.parse(stdin.readLineSync().toString());
+      switch (orderChoice) {
+        case 1:
+          User.showAllUsersInAscending();
+          break;
+        case 2:
+          User.showAllUsersInDescending();
+          break;
+        default:
+          throw Exception("Invalid choice encountered!");
+      }
+    } catch (exception) {
+      error = true;
+      print("Invalid choice. Please try again.");
+    }
+  } while (error);
 }
 
 void deleteUser() {
@@ -163,6 +189,7 @@ Please select an option:
           addUser();
           break;
         case 2:
+          displayUser();
           break;
         case 3:
           break;
@@ -178,8 +205,4 @@ Please select an option:
       print("$error");
     }
   } while (noExit);
-
-  for (User user in User.registeredUsers) {
-    user.showUserDetails();
-  }
 }

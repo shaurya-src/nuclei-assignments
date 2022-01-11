@@ -28,15 +28,22 @@ class User {
     print("$name \t $rollNumber \t\t $age \t $address \t ${courses.join(',')}");
   }
 
-  void showAllUsersInAscending() {
+  static void showAllUsersInAscending() {
+    print("__________________________________________________________");
+    print("Name \t Roll Number \t Age \t Address \t Courses");
+    print("__________________________________________________________");
     for (User user in registeredUsers) {
-      print("${user.name} ${user.rollNumber}");
+      print("${user.name} \t ${user.rollNumber} \t\t ${user.age} \t ${user.address} \t ${user.courses.join(',')}");
     }
   }
 
-  void showAllUsersInDescending() {
+  static void showAllUsersInDescending() {
+    print("__________________________________________________________");
+    print("Name \t Roll Number \t Age \t Address \t Courses");
+    print("__________________________________________________________");
     for (int index = registeredUsers.length - 1; index >= 0; index--) {
-      print("${registeredUsers[index].name} ${registeredUsers[index].rollNumber}");
+      User user = registeredUsers[index];
+      print("${user.name} \t ${user.rollNumber} \t\t ${user.age} \t ${user.address} \t ${user.courses.join(',')}");
     }
   }
 }
