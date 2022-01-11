@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'user.dart';
 import 'util.dart';
+import 'dart:convert';
+import 'dart:async';
 
 void addUser() {
   String name;
@@ -170,8 +172,20 @@ void deleteUser() {
   }
 }
 
-void loadUsers() {
-  // Function to load Users from memory
+void loadUsers() async {
+  // Function to save Users to memory
+  final file = File('data/userData.json');
+  Stream<String> lines = file.openRead().transform(utf8.decoder).transform(LineSplitter());
+  try {
+    await for (var line in lines) {
+      final json = jsonDecode(line);
+      User user = User.fromJson(json);
+      User.registeredUsers.add(user);
+      User.registeredRollNumbers.add(user.rollNumber);
+    }
+  } catch (e) {
+    print('Error: $e');
+  }
 }
 
 void saveUsers() {
@@ -180,6 +194,10 @@ void saveUsers() {
 
 void main() {
   bool noExit = true;
+
+  // Load users from memory
+  loadUsers();
+
   do {
     print('''
 
