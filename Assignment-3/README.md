@@ -20,10 +20,10 @@ Basically the data structure should allow you to store the parent child relation
 
 **Design:**
 
-    - The node information, which we will store, is:
-    - Node Id --- This has to be unique.
-    - Node Name. Need not be distinct.
-    - Additional Information --- In the form of a key value pairs and this can be different for each node.
+    The node information, which we will store, is:
+        - Node Id --- This has to be unique.
+        - Node Name. Need not be distinct.
+        - Additional Information --- In the form of a key value pairs and this can be different for each node.
 
 **Operations:**
 
