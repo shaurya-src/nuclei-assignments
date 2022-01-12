@@ -174,14 +174,16 @@ void deleteUser() {
 
 void loadUsers() async {
   // Function to save Users to memory
-  final file = File('data/userData.json');
+  final file = File('assets/user_data.txt');
   Stream<String> lines = file.openRead().transform(utf8.decoder).transform(LineSplitter());
   try {
     await for (var line in lines) {
-      final json = jsonDecode(line);
-      User user = User.fromJson(json);
-      User.registeredUsers.add(user);
-      User.registeredRollNumbers.add(user.rollNumber);
+      if (!line.isEmpty) {
+        final json = jsonDecode(line);
+        User user = User.fromJson(json);
+        User.registeredUsers.add(user);
+        User.registeredRollNumbers.add(user.rollNumber);
+      }
     }
   } catch (e) {
     print('Error: $e');
@@ -190,11 +192,17 @@ void loadUsers() async {
 
 void saveUsers() {
   // Function to save Users to memory
-  File outputFile = File('data/userData.json');
-  outputFile.createSync();
-  for (User user in User.registeredUsers) {
-    String json = jsonEncode(user);
-    outputFile.writeAsStringSync(json, mode: FileMode.append);
+  File outputFile = File('assets/user_data.txt');
+  try {
+    outputFile.createSync();
+    for (User user in User.registeredUsers) {
+      String json = jsonEncode(user);
+      outputFile.writeAsStringSync(json, mode: FileMode.append);
+      outputFile.writeAsStringSync("\n", mode: FileMode.append);
+    }
+    print("Saved all users successfully!");
+  } catch (exception) {
+    print(exception);
   }
 }
 
@@ -202,7 +210,7 @@ void main() {
   bool noExit = true;
 
   // Load users from memory
-  loadUsers();
+  // loadUsers();
 
   do {
     print('''
