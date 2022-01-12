@@ -173,7 +173,7 @@ void deleteUser() {
 }
 
 void loadUsers() async {
-  // Function to save Users to memory
+  // Function to load all the Users from memory
   final file = File('assets/user_data.txt');
   Stream<String> lines = file.openRead().transform(utf8.decoder).transform(LineSplitter());
   try {
@@ -185,6 +185,8 @@ void loadUsers() async {
         User.registeredRollNumbers.add(user.rollNumber);
       }
     }
+    print(User.registeredRollNumbers);
+    print(User.registeredUsers.length);
   } catch (e) {
     print('Error: $e');
   }
@@ -210,7 +212,7 @@ void main() {
   bool noExit = true;
 
   // Load users from memory
-  // loadUsers();
+  loadUsers();
 
   do {
     print('''
