@@ -1,13 +1,11 @@
 import 'dart:io';
 import 'item.dart';
 import 'util.dart';
+import 'item_factory.dart';
 
 void main() {
   // Continue taking inputs as long as user enters y/Y when asked.
-
   do {
-    // ############################################
-
     double? itemPrice;
     int? itemQuantity;
     String itemName;
@@ -70,36 +68,13 @@ void main() {
       }
     } while (errorFlag);
 
-    // ############################################
+    // Using ItemFactory to generate items
+    Item item = ItemFactory.factoryClass(itemName, itemPrice ?? 0, itemQuantity ?? 0, itemType);
 
-    // Initialize item when no error is encounterd
-    switch (itemType) {
-      case ItemType.raw:
-        Raw test = Raw(itemName, itemPrice ?? 0.0, itemQuantity ?? 0, itemType);
-        test.showItemDetails();
-        test.showTaxDetails();
-
-        // Output the required details
-        test.showFinalDetails();
-        break;
-
-      case ItemType.manufactured:
-        Manufactured test = Manufactured(itemName, itemPrice ?? 0.0, itemQuantity ?? 0, itemType);
-        test.showItemDetails();
-        test.showTaxDetails();
-        test.showFinalDetails();
-        break;
-      case ItemType.imported:
-        Imported test = Imported(itemName, itemPrice ?? 0.0, itemQuantity ?? 0, itemType);
-        test.showItemDetails();
-        test.showTaxDetails();
-        test.showFinalDetails();
-        break;
-      default:
-        throw Exception("Invalid Item type encountered!");
-    }
-
-    // Item test = Item(itemName, price: itemPrice ?? 0.0, quantity: itemQuantity ?? 0, type: itemType);
+    // Output required details
+    item.showItemDetails();
+    item.showTaxDetails();
+    item.showFinalDetails();
 
     stdout.write("Do you want to enter details of any other item (y/n):\t");
   } while (stdin.readLineSync().toString().toLowerCase() == 'y');
