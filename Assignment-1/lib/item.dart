@@ -1,5 +1,3 @@
-enum ItemType { raw, manufactured, imported }
-
 class Item {
   // Define attributes of the Item Class
   final String name;

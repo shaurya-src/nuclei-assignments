@@ -3,6 +3,8 @@ import 'items/raw.dart';
 import 'items/manufactured.dart';
 import 'items/imported.dart';
 
+enum ItemType { raw, manufactured, imported }
+
 class ItemFactory {
   // function to use factory design
   static Item factoryClass(String name, double price, int quantity, ItemType type) {
