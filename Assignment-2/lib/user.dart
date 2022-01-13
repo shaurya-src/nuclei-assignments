@@ -64,6 +64,7 @@ class User {
       for (User user in registeredUsers) {
         if (user.rollNumber == rollNumber) {
           registeredUsers.remove(user);
+          registeredRollNumbers.remove(rollNumber);
         }
       }
     } else {
