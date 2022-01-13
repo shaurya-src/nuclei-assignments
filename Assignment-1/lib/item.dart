@@ -5,7 +5,6 @@ class Item {
   final String name;
   final double price;
   final int quantity;
-  final ItemType type;
 
   /* 
   Constructor to initialize the object
@@ -13,7 +12,7 @@ class Item {
   price, quantity, type are named args
   out of these three, only type is mandatory
   */
-  Item(this.name, {this.price = 0, this.quantity = 1, required this.type});
+  Item(this.name, {this.price = 0, this.quantity = 1});
 
   // define late variables to store tax and final price
   late double _salesTax = calculateSalesTax();
@@ -40,7 +39,6 @@ class Item {
     Name: $name
     Price: $price
     Quantity: $quantity
-    Type: $type
     ____________________
     """);
   }
@@ -63,51 +61,5 @@ class Item {
 
     >>>>>>>>>><<<<<<<<<<
     ''');
-  }
-}
-
-// Child class for Raw items
-class Raw extends Item {
-  Raw(String name, double price, int quantity, ItemType type) : super(name, price: price, quantity: quantity, type: type);
-
-  @override
-  double calculateSalesTax() {
-    return 0.125 * price;
-  }
-}
-
-//Child class for Manufactured items
-class Manufactured extends Item {
-  Manufactured(String name, double price, int quantity, ItemType type) : super(name, price: price, quantity: quantity, type: type);
-
-  @override
-  double calculateSalesTax() {
-    double _baseTax = 0.125 * price;
-    return _baseTax + (0.02 * 1.125 * price);
-  }
-}
-
-// Child class for Imported items
-class Imported extends Item {
-  Imported(String name, double price, int quantity, ItemType type) : super(name, price: price, quantity: quantity, type: type);
-
-  @override
-  double calculateSalesTax() {
-    double _importDuty = 0.1 * price;
-    double _baseTax = 0.125 * price;
-    double _lumpSumAmount = price + _importDuty + _baseTax;
-
-    var _surcharge;
-
-    // [<= not working in else if statement]
-    if (_lumpSumAmount <= 100) {
-      _surcharge = 5;
-    } else if (100 < _lumpSumAmount && _lumpSumAmount <= 200) {
-      _surcharge = 10;
-    } else {
-      _surcharge = 0.05 * _lumpSumAmount;
-    }
-
-    return _baseTax + _importDuty + _surcharge;
   }
 }
