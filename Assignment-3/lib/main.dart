@@ -7,4 +7,7 @@ void main() {
   dag.addNode(root);
   dag.addNode(child);
   dag.showNodes();
+
+  dag.addDependency(root.id, child.id);
+  dag.showGraph();
 }

@@ -44,7 +44,11 @@ class Graph {
   // Method to add a dependency
   // Keep check for cyclic dependency
   void addDependency(String parentId, String childId) {
-    ;
+    if (this.graph[parentId] != null) {
+      this.graph[parentId]!.add(childId);
+    } else {
+      this.graph[parentId] = [childId];
+    }
   }
 
   // Method to add a node to graph
@@ -54,7 +58,7 @@ class Graph {
 
   // Method to show the graph
   void showGraph() {
-    ;
+    print(this.graph);
   }
 
   // Method to show the nodes
