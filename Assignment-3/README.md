@@ -32,7 +32,7 @@ Basically the data structure should allow you to store the parent child relation
     - [] Get the ancestors of a node, passing the node id as input parameter.
     - [] Get the descendants of a node, passing the node id as input parameter.
     - [x] Delete dependency from a tree, passing parent node id and child node id.
-    - [] Delete a node from a tree, passing node id as input parameter. This should delete all the dependencies of the node.
+    - [x] Delete a node from a tree, passing node id as input parameter. This should delete all the dependencies of the node.
     - [x] Add a new dependency to a tree, passing parent node id and child node id. This should check for cyclic dependencies.
     - [x] Add a new node to tree. This node will have no parents and children. Dependency will be established by calling the 7 number API.
 

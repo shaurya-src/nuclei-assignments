@@ -21,6 +21,9 @@ void main() {
   String y = dag.getImmediateParent('c');
   print("Parents: $y");
 
-  dag.deleteDependency(root.id, child.id);
+  // dag.deleteDependency(root.id, child.id);
+  // dag.showGraph();
+
+  dag.deleteNode(child.id);
   dag.showGraph();
 }

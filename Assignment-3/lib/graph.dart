@@ -45,7 +45,11 @@ class Graph {
 
   // Method to remove a node
   void deleteNode(String nodeId) {
-    ;
+    this.nodes.remove(nodeId);
+    this.graph.remove(nodeId);
+    this.graph.forEach((key, value) => {
+          if (value.contains(nodeId)) {value.remove(nodeId)}
+        });
   }
 
   // Method to add a dependency
