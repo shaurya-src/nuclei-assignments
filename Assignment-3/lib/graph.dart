@@ -8,7 +8,7 @@ class Node {
 
 class Graph {
   final Node root = Node('0', 'root');
-  List<Node> nodes = [];
+  Map<String, Node> nodes = {};
   Map<String, List<String>> graph = {};
 
   // Method to get immediate parent of a node
@@ -49,7 +49,7 @@ class Graph {
 
   // Method to add a node to graph
   void addNode(Node node) {
-    this.nodes.add(node);
+    this.nodes[node.id] = node;
   }
 
   // Method to show the graph
@@ -59,6 +59,6 @@ class Graph {
 
   // Method to show the nodes
   void showNodes() {
-    this.nodes.forEach((element) => print("${element.id} : ${element.label}"));
+    this.nodes.forEach((key, value) => print("${value.id} : ${value.label}"));
   }
 }
