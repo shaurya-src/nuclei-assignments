@@ -49,11 +49,16 @@ class Graph {
 
   // Method to add a node to graph
   void addNode(Node node) {
-    ;
+    this.nodes.add(node);
   }
 
   // Method to show the graph
   void showGraph() {
     ;
+  }
+
+  // Method to show the nodes
+  void showNodes() {
+    this.nodes.forEach((element) => print("${element.id} : ${element.label}"));
   }
 }
