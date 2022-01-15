@@ -37,7 +37,10 @@ class Graph {
 
   // Method to delete a dependency
   void deleteDependency(String parentId, String childId) {
-    ;
+    this.graph[parentId]!.remove(childId);
+    if (this.graph[parentId]!.isEmpty) {
+      this.graph.remove(parentId);
+    }
   }
 
   // Method to remove a node
