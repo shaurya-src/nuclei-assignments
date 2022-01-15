@@ -12,8 +12,12 @@ void main() {
 
   dag.addDependency(root.id, child.id);
   dag.addDependency(child.id, child2.id);
+  dag.addDependency(root.id, child2.id);
   dag.showGraph();
 
-  String x = dag.getImmediateChild('c');
-  print(x);
+  String x = dag.getImmediateChild('a');
+  print("Childs: $x");
+
+  String y = dag.getImmediateParent('c');
+  print("Parents: $y");
 }

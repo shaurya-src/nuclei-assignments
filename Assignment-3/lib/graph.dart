@@ -13,7 +13,11 @@ class Graph {
 
   // Method to get immediate parent of a node
   String getImmediateParent(String nodeId) {
-    return '';
+    List<String> _parents = [];
+    this.graph.forEach((key, value) => {
+          if (value.contains(nodeId)) {_parents.add(key)}
+        });
+    return "$_parents";
   }
 
   // Method to get immediate child of a node
