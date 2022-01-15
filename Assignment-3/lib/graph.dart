@@ -18,7 +18,7 @@ class Graph {
 
   // Method to get immediate child of a node
   String getImmediateChild(String nodeId) {
-    return '';
+    return "${this.graph[nodeId]}";
   }
 
   //Method to get ancestors of a node
