@@ -33,14 +33,15 @@ class Graph {
   //Method to get decendents of a node
   List<String> getDecendents(String nodeId) {
     List<String> decendents = [];
-    /*
-    Initially childs wla stack
-    then pop each node one by one
-    and add to list
-    do the same for all popped nodes
-    recursively
-    until the initial stack is empty
-    */
+    List<String>? immediateChild = this.graph[nodeId];
+
+    if (immediateChild == null || immediateChild.isEmpty) {
+      return [];
+    }
+
+    for (String childId in immediateChild) {
+      decendents.add(childId);
+    }
     return decendents;
   }
 
