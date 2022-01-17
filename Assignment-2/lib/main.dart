@@ -10,70 +10,12 @@ void addUser() {
   String address;
   int? rollNumber;
   List<String>? courses;
-  bool error = false;
 
   name = Util.inputName();
   age = Util.inputAge();
   address = Util.inputAddress();
-
-  // Input user's Roll Number
-  do {
-    stdout.write("Enter the roll number:   ");
-    try {
-      error = false;
-      String rollNumberString = stdin.readLineSync().toString();
-      // Check for string or null input
-      if (int.tryParse(rollNumberString) == null || rollNumberString.isEmpty) {
-        error = true;
-        throw Exception("Invalid Roll Number. Please try again!");
-      } else {
-        rollNumber = int.parse(rollNumberString);
-        if (Util.isGreaterThanZero(rollNumber)) {
-          if (Util.isRollNumberAlreadyPresent(rollNumber)) {
-            error = true;
-            throw Exception("Roll number already present! Please try again.");
-          }
-        } else {
-          error = true;
-          throw Exception("Roll number must be greater than zero.");
-        }
-      }
-    } catch (exception) {
-      print(exception);
-    }
-  } while (error);
-
-  // Input user's courses
-  do {
-    stdout.write("Enter the courses (seperated by ','):   ");
-    String coursesString = stdin.readLineSync().toString();
-    try {
-      error = false;
-      // Check for empty and numeric strings
-      if (coursesString.isEmpty || Util.isNumeric(coursesString)) {
-        error = true;
-        throw Exception("Invalid courses. Please try again.");
-      } else {
-        courses = coursesString.split(',');
-
-        if (courses.length < 4) {
-          error = true;
-          throw Exception("Please select atleast 4 courses.");
-        }
-
-        // Convert all elements to uppercase
-        courses = courses.map((course) => course.trim().toUpperCase()).toList();
-
-        // Verify if all the courses are valid
-        if (!Util.verifyCourses(courses)) {
-          error = true;
-          throw Exception("Invalid course(s) selected. Please choose from ['A', 'B', 'C', 'D', 'E', 'F'].");
-        }
-      }
-    } catch (exception) {
-      print(exception);
-    }
-  } while (error);
+  rollNumber = Util.inputRollNumber();
+  courses = Util.inputCourses();
 
   // Make user object from the input data
   User(name, age ?? 0, address, rollNumber ?? 0, courses ?? []);

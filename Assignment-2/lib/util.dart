@@ -102,4 +102,77 @@ class Util {
 
     return address;
   }
+
+  // Input user's roll number
+  static int? inputRollNumber() {
+    int? rollNumber;
+    bool error = false;
+
+    do {
+      stdout.write("Enter the roll number:   ");
+      try {
+        error = false;
+        String rollNumberString = stdin.readLineSync().toString();
+        // Check for string or null input
+        if (int.tryParse(rollNumberString) == null || rollNumberString.isEmpty) {
+          error = true;
+          throw Exception("Invalid Roll Number. Please try again!");
+        } else {
+          rollNumber = int.parse(rollNumberString);
+          if (Util.isGreaterThanZero(rollNumber)) {
+            if (Util.isRollNumberAlreadyPresent(rollNumber)) {
+              error = true;
+              throw Exception("Roll number already present! Please try again.");
+            }
+          } else {
+            error = true;
+            throw Exception("Roll number must be greater than zero.");
+          }
+        }
+      } catch (exception) {
+        print(exception);
+      }
+    } while (error);
+
+    return rollNumber;
+  }
+
+  // Input user's courses
+  static List<String>? inputCourses() {
+    List<String>? courses;
+    bool error = false;
+
+    do {
+      stdout.write("Enter the courses (seperated by ','):   ");
+      String coursesString = stdin.readLineSync().toString();
+      try {
+        error = false;
+        // Check for empty and numeric strings
+        if (coursesString.isEmpty || Util.isNumeric(coursesString)) {
+          error = true;
+          throw Exception("Invalid courses. Please try again.");
+        } else {
+          courses = coursesString.split(',');
+
+          if (courses.length < 4) {
+            error = true;
+            throw Exception("Please select atleast 4 courses.");
+          }
+
+          // Convert all elements to uppercase
+          courses = courses.map((course) => course.trim().toUpperCase()).toList();
+
+          // Verify if all the courses are valid
+          if (!Util.verifyCourses(courses)) {
+            error = true;
+            throw Exception("Invalid course(s) selected. Please choose from ['A', 'B', 'C', 'D', 'E', 'F'].");
+          }
+        }
+      } catch (exception) {
+        print(exception);
+      }
+    } while (error);
+
+    return courses;
+  }
 }
