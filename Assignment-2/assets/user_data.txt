@@ -1,3 +1,1 @@
 {"name":"Ankit","age":22,"address":"Mumbai","rollNumber":3,"courses":["A","B","E","F"]}
-{"name":"Ashi","age":20,"address":"Korba","rollNumber":5,"courses":["E","B","C","A"]}
-{"name":"Shaurya","age":31,"address":"Korea","rollNumber":19,"courses":["C","D","A","E"]}
