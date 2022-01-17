@@ -8,6 +8,9 @@ class User {
   final int rollNumber;
   final List<String> courses;
 
+  static const String _fields = "Name \t Roll Number \t Age \t Address \t Courses";
+  static const String _seperator = "__________________________________________________________";
+
   // Data structure to store students
   static HashSet registeredRollNumbers = new HashSet<int>();
   static List<User> registeredUsers = [];
@@ -34,25 +37,19 @@ class User {
   Map<String, dynamic> toJson() => {'name': name, 'age': age, 'address': address, 'rollNumber': rollNumber, 'courses': courses};
 
   void showUserDetails() {
-    print("__________________________________________________________");
-    print("Name \t Roll Number \t Age \t Address \t Courses");
-    print("__________________________________________________________");
+    print("$_seperator \n $_fields \n $_seperator");
     print("$name \t $rollNumber \t\t $age \t $address \t ${courses.join(',')}");
   }
 
   static void showAllUsersInAscending() {
-    print("__________________________________________________________");
-    print("Name \t Roll Number \t Age \t Address \t Courses");
-    print("__________________________________________________________");
+    print("$_seperator \n $_fields \n $_seperator");
     for (User user in registeredUsers) {
       print("${user.name} \t ${user.rollNumber} \t\t ${user.age} \t ${user.address} \t ${user.courses.join(',')}");
     }
   }
 
   static void showAllUsersInDescending() {
-    print("__________________________________________________________");
-    print("Name \t Roll Number \t Age \t Address \t Courses");
-    print("__________________________________________________________");
+    print("$_seperator \n $_fields \n $_seperator");
     for (int index = registeredUsers.length - 1; index >= 0; index--) {
       User user = registeredUsers[index];
       print("${user.name} \t ${user.rollNumber} \t\t ${user.age} \t ${user.address} \t ${user.courses.join(',')}");
