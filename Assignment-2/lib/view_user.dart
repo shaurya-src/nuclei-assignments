@@ -50,10 +50,11 @@ class ViewUser {
     File outputFile = File('assets/user_data.txt');
     try {
       outputFile.createSync();
+      outputFile.writeAsStringSync('');
       for (User user in User.registeredUsers) {
         String json = jsonEncode(user);
-        outputFile.writeAsStringSync(json, mode: FileMode.writeOnly);
-        outputFile.writeAsStringSync("\n", mode: FileMode.writeOnly);
+        outputFile.writeAsStringSync(json, mode: FileMode.append);
+        outputFile.writeAsStringSync("\n", mode: FileMode.append);
       }
       print("Saved all users successfully!");
     } catch (exception) {
