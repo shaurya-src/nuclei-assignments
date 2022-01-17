@@ -12,57 +12,9 @@ void addUser() {
   List<String>? courses;
   bool error = false;
 
-  // Input user's Full Name
-  do {
-    stdout.write("Enter the full name:   ");
-    name = stdin.readLineSync().toString();
-    try {
-      error = false;
-      if (Util.isNumeric(name) || name.isEmpty) {
-        error = true;
-        throw Exception("Invalid name. Please try again!");
-      }
-    } catch (exception) {
-      print(exception);
-    }
-  } while (error);
-
-  // Input user's Age
-  do {
-    stdout.write("Enter the age:   ");
-    try {
-      error = false;
-      String ageString = stdin.readLineSync().toString();
-      // Check for string or null input
-      if (int.tryParse(ageString) == null || ageString.isEmpty) {
-        error = true;
-        throw Exception("Invalid age. Please try again!");
-      } else {
-        age = int.parse(ageString);
-        if (!Util.isGreaterThanZero(age)) {
-          error = true;
-          throw Exception("Age must be greater than zero.");
-        }
-      }
-    } catch (exception) {
-      print(exception);
-    }
-  } while (error);
-
-  // Input user's Address
-  do {
-    stdout.write("Enter the address:   ");
-    address = stdin.readLineSync().toString();
-    try {
-      error = false;
-      if (Util.isNumeric(address) || address.isEmpty) {
-        error = true;
-        throw Exception("Invalid address. Please try again!");
-      }
-    } catch (exception) {
-      print(exception);
-    }
-  } while (error);
+  name = Util.inputName();
+  age = Util.inputAge();
+  address = Util.inputAddress();
 
   // Input user's Roll Number
   do {
