@@ -2,6 +2,7 @@ import 'dart:io';
 import 'user.dart';
 import 'util.dart';
 import 'dart:convert';
+import 'package:encrypt/encrypt.dart';
 
 class ViewUser {
   static const String _fields = "Name \t Roll Number \t Age \t Address \t Courses";
@@ -52,8 +53,10 @@ class ViewUser {
       outputFile.createSync();
       outputFile.writeAsStringSync('');
       for (User user in User.registeredUsers) {
-        String json = jsonEncode(user);
-        outputFile.writeAsStringSync(json, mode: FileMode.append);
+        String _json = jsonEncode(user);
+        final encypter = Util.getEncrypter();
+        final encrypted_text = encypter.encrypt(_json, iv: IV.fromLength(16));
+        outputFile.writeAsStringSync(encrypted_text.base64, mode: FileMode.append);
         outputFile.writeAsStringSync("\n", mode: FileMode.append);
       }
       print("Saved all users successfully!");
