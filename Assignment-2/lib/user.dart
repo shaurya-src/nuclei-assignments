@@ -20,8 +20,7 @@ class User {
   User(this.name, this.age, this.address, this.rollNumber, this.courses) {
     registeredRollNumbers.add(this.rollNumber);
     registeredUsers.add(this);
-    registeredUsers.sort((a, b) => a.rollNumber.compareTo(b.rollNumber));
-    registeredUsers.sort((a, b) => a.name.compareTo(b.name));
+    this.sortUsers();
   }
 
   // From JSON to User object
@@ -35,6 +34,11 @@ class User {
 
   // From User object to JSON
   Map<String, dynamic> toJson() => {'name': name, 'age': age, 'address': address, 'rollNumber': rollNumber, 'courses': courses};
+
+  void sortUsers() {
+    registeredUsers.sort((a, b) => a.rollNumber.compareTo(b.rollNumber));
+    registeredUsers.sort((a, b) => a.name.compareTo(b.name));
+  }
 
   void showUserDetails() {
     print("$_seperator \n $_fields \n $_seperator");

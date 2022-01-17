@@ -230,7 +230,7 @@ class Util {
   // Function to delete user
   static void deleteUser() {
     int rollNumberToDelete;
-    stdout.write("\nEnter the Roll Number of user to delte:   ");
+    stdout.write("\nEnter the Roll Number of user to delete:   ");
     try {
       rollNumberToDelete = int.parse(stdin.readLineSync().toString());
       if (User.deleteUser(rollNumberToDelete)) {
