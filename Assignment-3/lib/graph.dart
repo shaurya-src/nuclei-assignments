@@ -31,8 +31,17 @@ class Graph {
   }
 
   //Method to get decendents of a node
-  String getDecendents(String nodeId) {
-    return '';
+  List<String> getDecendents(String nodeId) {
+    List<String> decendents = [];
+    /*
+    Initially childs wla stack
+    then pop each node one by one
+    and add to list
+    do the same for all popped nodes
+    recursively
+    until the initial stack is empty
+    */
+    return decendents;
   }
 
   // Method to delete a dependency
