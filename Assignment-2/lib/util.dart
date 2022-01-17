@@ -1,5 +1,6 @@
 import 'user.dart';
 import 'dart:io';
+import 'package:encrypt/encrypt.dart';
 
 class Util {
   // Function to check if selected courses are valid
@@ -179,5 +180,11 @@ class Util {
     } while (error);
 
     return courses;
+  }
+
+  static Encrypter getEncrypter() {
+    final key = Key.fromLength(32);
+
+    return Encrypter(AES(key));
   }
 }
