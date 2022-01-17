@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'util.dart';
+import 'user_details.dart';
 
 void main() async {
   bool noExit = true;
 
   // Load users from memory
-  await Util.loadUsers();
+  await UserDetails.loadUsers();
 
   do {
     print('''
@@ -27,16 +27,16 @@ Please select an option:
 
       switch (choice) {
         case 1:
-          Util.addUser();
+          UserDetails.addUser();
           break;
         case 2:
-          Util.displayUser();
+          UserDetails.displayUser();
           break;
         case 3:
-          Util.deleteUser();
+          UserDetails.deleteUser();
           break;
         case 4:
-          Util.saveUsers();
+          UserDetails.saveUsers();
           break;
         case 5:
           noExit = false;
