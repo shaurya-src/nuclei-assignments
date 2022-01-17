@@ -18,7 +18,6 @@ class User {
   // Constant constructur to initialize a User object
   // All the arguments are mandatory
   User(this.name, this.age, this.address, this.rollNumber, this.courses) {
-    registeredRollNumbers.add(this.rollNumber);
     registeredUsers.add(this);
     this.sortUsers();
   }
