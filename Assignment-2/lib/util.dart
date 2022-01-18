@@ -180,10 +180,4 @@ class Util {
 
     return courses;
   }
-
-  static Encrypter getEncrypter() {
-    final key = Key.fromLength(32);
-
-    return Encrypter(AES(key));
-  }
 }
