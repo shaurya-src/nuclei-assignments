@@ -1,5 +1,5 @@
 class Node {
-  final String id;
+  final int id;
   final String label;
   final Map<String, dynamic>? additionalInfo;
 
@@ -7,9 +7,9 @@ class Node {
 }
 
 class Graph {
-  final Node root = Node('0', 'root');
-  Map<String, Node> nodes = {};
-  Map<String, List<String>> graph = {};
+  final Node root = Node(0, 'root');
+  Map<int, Node> nodes = {};
+  Map<Node, List<Node>> graph = {};
 
   // Method to get immediate parent of a node
   String getImmediateParent(String nodeId) {
@@ -75,6 +75,7 @@ class Graph {
   // Method to add a node to graph
   void addNode(Node node) {
     this.nodes[node.id] = node;
+    this.graph[node] = [];
   }
 
   // Method to show the graph
