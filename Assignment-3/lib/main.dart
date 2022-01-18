@@ -1,5 +1,4 @@
-import 'package:graph/util.dart';
-
+import 'traversal.dart';
 import 'graph.dart';
 
 void main() {
@@ -42,4 +41,5 @@ void main() {
   // Util.dfs(dag.graph, five, traversal);
   // print(traversal);
   print(dag.getDescendants(1));
+  print(dag.getAncestors(8));
 }

@@ -1,18 +1,5 @@
 import 'dart:io';
-import 'package:graph/util.dart';
-
-class Node {
-  final int id;
-  final String label;
-  final Map<String, dynamic>? additionalInfo;
-
-  Node(this.id, this.label, [this.additionalInfo]);
-
-  @override
-  String toString() {
-    return "ID: ${this.id}, Label: ${this.label}";
-  }
-}
+import 'traversal.dart';
 
 class Graph {
   Map<int, Node> nodes = {};
@@ -68,16 +55,20 @@ class Graph {
 
   //Method to get ancestors of a node
   List<Node> getAncestors(int nodeId) {
-    List<Node> _ancestors = [];
-    return _ancestors;
+    Traversal traversal = Traversal();
+    Node _node = this.nodes[nodeId]!;
+    final reversedGraph = Traversal.reverseGraph(this.graph);
+    // print(reversedGraph);
+    Traversal.dfs(reversedGraph, _node, traversal);
+    traversal.visits.remove(_node);
+    return traversal.visits;
   }
 
   //Method to get decendents of a node
   List<Node> getDescendants(int nodeId) {
-    // List<Node> _descendants;
     Traversal traversal = Traversal();
     Node _node = this.nodes[nodeId]!;
-    Util.dfs(this.graph, _node, traversal);
+    Traversal.dfs(this.graph, _node, traversal);
     traversal.visits.remove(_node);
     return traversal.visits;
   }
