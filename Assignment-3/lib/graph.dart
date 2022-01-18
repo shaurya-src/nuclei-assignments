@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'traversal.dart';
+import 'node_traversal.dart';
 
 class Graph {
   Map<int, Node> nodes = {};
