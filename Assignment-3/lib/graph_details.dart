@@ -6,6 +6,7 @@ import 'node_traversal.dart';
 class GraphDetails {
   static void addNode(Graph graph) {
     bool error = false;
+    Map<String, String> additional = {};
     do {
       try {
         error = false;
@@ -13,9 +14,14 @@ class GraphDetails {
         int nodeId = int.parse(stdin.readLineSync().toString());
         stdout.write("\nEnter Node Label:  ");
         String nodeLabel = stdin.readLineSync().toString();
-        stdout.write("\nEnter Additional Info (key:value):  ");
-        List<String> infoList = stdin.readLineSync().toString().split(':');
-        Map<String, String> additional = {infoList[0].trim(): infoList[1].trim()};
+
+        stdout.write('Do you want to add additional Information? (y/n):  ');
+        String choice = stdin.readLineSync().toString().toLowerCase();
+        if (choice == "y") {
+          stdout.write("\nEnter Additional Info (key:value):  ");
+          List<String> infoList = stdin.readLineSync().toString().split(':');
+          additional = {infoList[0].trim(): infoList[1].trim()};
+        }
 
         // Validate
         if (Util.idAlreadyPresent(graph, nodeId) || Util.isNumeric(nodeLabel) || nodeLabel.isEmpty) {
