@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class Node {
   final int id;
   final String label;
@@ -36,12 +38,15 @@ class Graph {
     this.graph.remove(_deleteNode);
 
     this.graph.forEach((parent, childs) {
-      for (Node child in childs) {
-        if (child == _deleteNode) {
-          childs.remove(child);
-        }
-      }
+      childs.remove(_deleteNode);
     });
+  }
+
+  // Method to delete a dependency
+  void deleteDependency(int parentId, int childId) {
+    Node? _source = this.nodes[parentId];
+    Node? _destination = this.nodes[childId];
+    this.graph[_source]!.remove(_destination);
   }
 
   // Method to get immediate child of a node
@@ -51,49 +56,42 @@ class Graph {
   }
 
   // Method to get immediate parent of a node
-  String getImmediateParent(String nodeId) {
-    List<String> _parents = [];
+  List<Node> getImmediateParent(int nodeId) {
+    List<Node> _parents = [];
+    Node? _node = this.nodes[nodeId];
     this.graph.forEach((key, value) => {
-          if (value.contains(nodeId)) {_parents.add(key)}
+          if (value.contains(_node)) {_parents.add(key)}
         });
-    return "$_parents";
+    return _parents;
   }
 
   //Method to get ancestors of a node
-  String getAncestors(String nodeId) {
-    return '';
+  List<Node> getAncestors(int nodeId) {
+    List<Node> _ancestors = [];
+    return _ancestors;
   }
 
   //Method to get decendents of a node
-  List<String> getDecendents(String nodeId) {
-    List<String> decendents = [];
-    List<String>? immediateChild = this.graph[nodeId];
-
-    if (immediateChild == null || immediateChild.isEmpty) {
-      return [];
-    }
-
-    for (String childId in immediateChild) {
-      decendents.add(childId);
-    }
-    return decendents;
-  }
-
-  // Method to delete a dependency
-  void deleteDependency(String parentId, String childId) {
-    this.graph[parentId]!.remove(childId);
-    if (this.graph[parentId]!.isEmpty) {
-      this.graph.remove(parentId);
-    }
+  List<Node> getDescendants(int nodeId) {
+    List<Node> _descendants = [];
+    return _descendants;
   }
 
   // Method to show the graph
   void showGraph() {
-    print(this.graph);
+    this.graph.forEach((key, value) {
+      stdout.write("${key.id}: [ ");
+      for (Node child in value) {
+        stdout.write("${child.id} ");
+      }
+      stdout.write("] \n");
+    });
   }
 
   // Method to show the nodes
   void showNodes() {
-    this.nodes.forEach((key, value) => print("${value.id} : ${value.label}"));
+    this.nodes.forEach((key, value) {
+      print(value.toString());
+    });
   }
 }
