@@ -1,3 +1,5 @@
+import 'package:graph/util.dart';
+
 import 'graph.dart';
 
 void main() {
@@ -24,6 +26,10 @@ void main() {
   // dag.deleteDependency(root.id, child.id);
   // dag.showGraph();
 
-  dag.deleteNode(child.id);
-  dag.showGraph();
+  // dag.deleteNode(child.id);
+  // dag.showGraph();
+
+  Traversal traversal = Traversal();
+  Util.dfs(dag, "", traversal);
+  print(traversal);
 }
