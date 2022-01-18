@@ -1,7 +1,7 @@
 class Node {
   final int id;
   final String label;
-  final Map<String, dynamic>? additionalInfo;
+  final Map<String, String>? additionalInfo;
 
   Node(this.id, this.label, [this.additionalInfo]);
 
