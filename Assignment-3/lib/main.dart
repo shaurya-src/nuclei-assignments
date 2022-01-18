@@ -1,45 +1,63 @@
-import 'traversal.dart';
+import 'package:graph/graph_details.dart';
 import 'graph.dart';
+import 'dart:io';
 
 void main() {
+  bool noExit = true;
   Graph dag = Graph();
+  do {
+    print('''
 
-  // Define nodes
-  Node one = Node(1, 'First Node');
-  Node two = Node(2, 'Second Node');
-  Node three = Node(3, 'Third Node');
-  Node four = Node(4, 'Fourth Node');
-  Node five = Node(5, 'Fifth Node');
-  Node six = Node(6, 'Sixth Node');
-  Node seven = Node(7, 'Seventh Node');
-  Node eight = Node(8, 'Eighth Node');
+Please select an option:
 
-  // Add nodes
-  dag.addNode(one);
-  dag.addNode(two);
-  dag.addNode(three);
-  dag.addNode(four);
-  dag.addNode(five);
-  dag.addNode(six);
-  dag.addNode(seven);
-  dag.addNode(eight);
-  // dag.showNodes();
+1. Add a Node
+2. Add dependency
+3. Remove Node
+4. Remove Dependency
+5. View Immediate Child(s)
+6. View Immediate Parent(s)
+7. View Descendants
+8. View Ancestors
+9. Exit
+''');
 
-  // Add dependency
-  dag.addDependency(one.id, three.id);
-  dag.addDependency(one.id, four.id);
-  dag.addDependency(two.id, three.id);
-  dag.addDependency(two.id, five.id);
-  dag.addDependency(two.id, eight.id);
-  dag.addDependency(three.id, eight.id);
-  dag.addDependency(four.id, six.id);
-  dag.addDependency(four.id, seven.id);
-  // dag.showGraph();
+    stdout.write("Enter your choice: ");
+    try {
+      int choice = int.parse(stdin.readLineSync().toString());
 
-  // Traversal for descendants
-  // Traversal traversal = Traversal();
-  // Util.dfs(dag.graph, five, traversal);
-  // print(traversal);
-  print(dag.getDescendants(1));
-  print(dag.getAncestors(8));
+      switch (choice) {
+        case 1:
+          GraphDetails.addNode(dag);
+          break;
+        case 2:
+          GraphDetails.addDependency(dag);
+          break;
+        case 3:
+          GraphDetails.removeNode(dag);
+          break;
+        case 4:
+          GraphDetails.removeDependency(dag);
+          break;
+        case 5:
+          GraphDetails.showChildrens(dag);
+          break;
+        case 6:
+          GraphDetails.showParents(dag);
+          break;
+        case 7:
+          GraphDetails.showDescendants(dag);
+          break;
+        case 8:
+          GraphDetails.showAncestors(dag);
+          break;
+        case 9:
+          noExit = false;
+          break;
+        default:
+          throw Exception("Invalid choice");
+      }
+    } catch (error) {
+      print("Please Enter a valid option!");
+    }
+  } while (noExit);
 }
