@@ -35,12 +35,16 @@ main() {
   });
 
   group('Check user records: ', () {
-    test('Registered Roll Numbers', () {
-      expect(1, 1);
+    test('Ascending order', () {
+      User user1 = User('Za', 19, 'Delhi', 2, ['A', 'C', 'E', 'B']);
+      User user2 = User('Ab', 21, 'Delhi', 17, ['A', 'C', 'E', 'B']);
+      expect(User.registeredUsers[0].rollNumber, 17);
     });
 
-    test('Registered Users', () {
-      expect(1, 1);
+    test('Descending order', () {
+      User user1 = User('Za', 19, 'Delhi', 2, ['A', 'C', 'E', 'B']);
+      User user2 = User('Ab', 21, 'Delhi', 17, ['A', 'C', 'E', 'B']);
+      expect(User.registeredUsers[User.registeredUsers.length - 1].name, "Za");
     });
   });
 }
