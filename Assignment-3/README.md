@@ -29,8 +29,8 @@ Basically the data structure should allow you to store the parent child relation
 
     - [x] Get the immediate parents of a node, passing the node id as input parameter.
     - [x] Get the immediate children of a node, passing the node id as input parameter.
-    - [] Get the ancestors of a node, passing the node id as input parameter.
-    - [] Get the descendants of a node, passing the node id as input parameter.
+    - [x] Get the ancestors of a node, passing the node id as input parameter.
+    - [x] Get the descendants of a node, passing the node id as input parameter.
     - [x] Delete dependency from a tree, passing parent node id and child node id.
     - [x] Delete a node from a tree, passing node id as input parameter. This should delete all the dependencies of the node.
     - [x] Add a new dependency to a tree, passing parent node id and child node id. This should check for cyclic dependencies.
