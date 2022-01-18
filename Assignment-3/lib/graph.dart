@@ -4,12 +4,51 @@ class Node {
   final Map<String, dynamic>? additionalInfo;
 
   Node(this.id, this.label, [this.additionalInfo]);
+
+  @override
+  String toString() {
+    return "ID: ${this.id}, Label: ${this.label}";
+  }
 }
 
 class Graph {
-  final Node root = Node(0, 'root');
   Map<int, Node> nodes = {};
   Map<Node, List<Node>> graph = {};
+
+  // Method to add a node to graph
+  void addNode(Node node) {
+    this.nodes[node.id] = node;
+    this.graph[node] = [];
+  }
+
+  // Method to add a dependency
+  // Keep check for cyclic dependency
+  void addDependency(int parentId, int childId) {
+    final Node _sourceNode = this.nodes[parentId]!;
+    final Node _destinationNode = this.nodes[childId]!;
+    this.graph[_sourceNode]!.add(_destinationNode);
+  }
+
+  // Method to remove a node
+  void deleteNode(int nodeId) {
+    Node? _deleteNode = this.nodes[nodeId];
+    this.nodes.remove(nodeId);
+    this.graph.remove(_deleteNode);
+
+    this.graph.forEach((parent, childs) {
+      for (Node child in childs) {
+        if (child == _deleteNode) {
+          childs.remove(child);
+        }
+      }
+    });
+  }
+
+  // Method to get immediate child of a node
+  List<Node> getImmediateChild(int nodeId) {
+    Node _node = this.nodes[nodeId]!;
+    return this.graph[_node]!;
+  }
 
   // Method to get immediate parent of a node
   String getImmediateParent(String nodeId) {
@@ -18,11 +57,6 @@ class Graph {
           if (value.contains(nodeId)) {_parents.add(key)}
         });
     return "$_parents";
-  }
-
-  // Method to get immediate child of a node
-  String getImmediateChild(String nodeId) {
-    return "${this.graph[nodeId]}";
   }
 
   //Method to get ancestors of a node
@@ -51,31 +85,6 @@ class Graph {
     if (this.graph[parentId]!.isEmpty) {
       this.graph.remove(parentId);
     }
-  }
-
-  // Method to remove a node
-  void deleteNode(String nodeId) {
-    this.nodes.remove(nodeId);
-    this.graph.remove(nodeId);
-    this.graph.forEach((key, value) => {
-          if (value.contains(nodeId)) {value.remove(nodeId)}
-        });
-  }
-
-  // Method to add a dependency
-  // Keep check for cyclic dependency
-  void addDependency(String parentId, String childId) {
-    if (this.graph[parentId] != null) {
-      this.graph[parentId]!.add(childId);
-    } else {
-      this.graph[parentId] = [childId];
-    }
-  }
-
-  // Method to add a node to graph
-  void addNode(Node node) {
-    this.nodes[node.id] = node;
-    this.graph[node] = [];
   }
 
   // Method to show the graph
