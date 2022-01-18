@@ -4,34 +4,41 @@ import 'graph.dart';
 
 void main() {
   Graph dag = Graph();
-  Node root = Node(1, 'First Node');
-  Node child = Node(2, 'Second Node');
-  Node child2 = Node(3, 'Third Node');
-  dag.addNode(root);
-  dag.addNode(child);
-  dag.addNode(child2);
-  dag.showNodes();
 
-  dag.addDependency(root.id, child.id);
-  dag.addDependency(child.id, child2.id);
-  dag.addDependency(root.id, child2.id);
-  dag.showGraph();
+  // Define nodes
+  Node one = Node(1, 'First Node');
+  Node two = Node(2, 'Second Node');
+  Node three = Node(3, 'Third Node');
+  Node four = Node(4, 'Fourth Node');
+  Node five = Node(5, 'Fifth Node');
+  Node six = Node(6, 'Sixth Node');
+  Node seven = Node(7, 'Seventh Node');
+  Node eight = Node(8, 'Eighth Node');
 
-  // var x = dag.getImmediateChild(1);
-  // print("Childs of 1: ");
+  // Add nodes
+  dag.addNode(one);
+  dag.addNode(two);
+  dag.addNode(three);
+  dag.addNode(four);
+  dag.addNode(five);
+  dag.addNode(six);
+  dag.addNode(seven);
+  dag.addNode(eight);
+  // dag.showNodes();
 
-  // var y = dag.getImmediateParent(2);
-  // print("Parents of 3: ");
-
-  dag.deleteDependency(root.id, child.id);
-  dag.deleteNode(3);
+  // Add dependency
+  dag.addDependency(one.id, three.id);
+  dag.addDependency(one.id, four.id);
+  dag.addDependency(two.id, three.id);
+  dag.addDependency(two.id, five.id);
+  dag.addDependency(two.id, eight.id);
+  dag.addDependency(three.id, eight.id);
+  dag.addDependency(four.id, six.id);
+  dag.addDependency(four.id, seven.id);
   // dag.showGraph();
 
-  // dag.deleteNode(child.id);
-  // dag.showGraph();
-
-  // Traversal traversal = Traversal();
-  // Util.dfs(dag, "", traversal);
-  // print(traversal);
-  dag.showGraph();
+  // Traversal for descendants
+  Traversal traversal = Traversal();
+  Util.dfs(dag.graph, five, traversal);
+  print(traversal);
 }
