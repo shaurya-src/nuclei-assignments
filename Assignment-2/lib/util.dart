@@ -1,6 +1,5 @@
 import 'user.dart';
 import 'dart:io';
-import 'package:encrypt/encrypt.dart';
 
 class Util {
   // Function to check if selected courses are valid

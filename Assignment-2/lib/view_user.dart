@@ -2,7 +2,6 @@ import 'dart:io';
 import 'user.dart';
 import 'util.dart';
 import 'dart:convert';
-import 'package:encrypt/encrypt.dart';
 
 class ViewUser {
   static const String _fields = "Name \t Roll Number \t Age \t Address \t Courses";
