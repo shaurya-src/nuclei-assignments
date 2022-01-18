@@ -78,8 +78,10 @@ class UserDetails {
     try {
       await for (var line in lines) {
         if (!line.isEmpty) {
-          final json = jsonDecode(line);
-          User user = User.fromJson(json);
+          var decoded = base64.decode(line);
+          var decodedString = utf8.decode(decoded);
+          final _json = jsonDecode(decodedString);
+          User user = User.fromJson(_json);
           User.registeredUsers.add(user);
           User.registeredRollNumbers.add(user.rollNumber);
         }

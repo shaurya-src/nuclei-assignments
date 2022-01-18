@@ -54,9 +54,9 @@ class ViewUser {
       outputFile.writeAsStringSync('');
       for (User user in User.registeredUsers) {
         String _json = jsonEncode(user);
-        final encypter = Util.getEncrypter();
-        final encrypted_text = encypter.encrypt(_json, iv: IV.fromLength(16));
-        outputFile.writeAsStringSync(encrypted_text.base64, mode: FileMode.append);
+        var utfUserDetails = utf8.encode(_json);
+        var encoded = base64.encode(utfUserDetails);
+        outputFile.writeAsStringSync(encoded, mode: FileMode.append);
         outputFile.writeAsStringSync("\n", mode: FileMode.append);
       }
       print("Saved all users successfully!");
