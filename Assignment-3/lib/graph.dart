@@ -72,15 +72,15 @@ class Graph {
     return _ancestors;
   }
 
-  // //Method to get decendents of a node
-  // List<Node> getDescendants(int nodeId) {
-  //   List<Node> _descendants = [];
-  //   Traversal traversal = Traversal();
-  //   Util.dfs(, child, traversal);
-  //   var x = traversal.visits;
-  //   print(x.runtimeType);
-  //   return _descendants;
-  // }
+  //Method to get decendents of a node
+  List<Node> getDescendants(int nodeId) {
+    // List<Node> _descendants;
+    Traversal traversal = Traversal();
+    Node _node = this.nodes[nodeId]!;
+    Util.dfs(this.graph, _node, traversal);
+    traversal.visits.remove(_node);
+    return traversal.visits;
+  }
 
   // Method to show the graph
   void showGraph() {

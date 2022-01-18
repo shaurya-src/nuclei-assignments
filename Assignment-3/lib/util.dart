@@ -32,34 +32,15 @@ class Traversal {
 }
 
 class Util {
-  // static void dfs(Graph dag, Node node, Traversal traversal) {
-  //   traversal.addVisited(node);
-  //   traversal.addVisit(node);
-  //   try {
-  //     if (!dag.graph[node]!.isEmpty) {
-  //       for (Node childNode in dag.graph[node]!) {
-  //         if (!traversal.hasVisited(childNode)) {
-  //           dfs(dag, childNode, traversal);
-  //         }
-  //       }
-  //     }
-  //   } catch (error) {
-  //     ;
-  //   }
-  // }
   static void dfs(Map<Node, List<Node>> graph, Node node, Traversal traversal) {
     traversal.addVisited(node);
     traversal.addVisit(node);
-    try {
-      if (!graph[node]!.isEmpty) {
-        for (Node childNode in graph[node]!) {
-          if (!traversal.hasVisited(childNode)) {
-            dfs(graph, childNode, traversal);
-          }
+    if (!graph[node]!.isEmpty) {
+      for (Node childNode in graph[node]!) {
+        if (!traversal.hasVisited(childNode)) {
+          dfs(graph, childNode, traversal);
         }
       }
-    } catch (error) {
-      ;
     }
   }
 }

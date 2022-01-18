@@ -38,7 +38,8 @@ void main() {
   // dag.showGraph();
 
   // Traversal for descendants
-  Traversal traversal = Traversal();
-  Util.dfs(dag.graph, five, traversal);
-  print(traversal);
+  // Traversal traversal = Traversal();
+  // Util.dfs(dag.graph, five, traversal);
+  // print(traversal);
+  print(dag.getDescendants(1));
 }
