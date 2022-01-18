@@ -32,9 +32,73 @@ class GraphDetails {
     } while (error);
   }
 
-  static void addDependency(Graph graph) {}
-  static void removeNode(Graph graph) {}
-  static void removeDependency(Graph graph) {}
+  static void addDependency(Graph graph) {
+    bool error = false;
+    do {
+      try {
+        error = false;
+        stdout.write("\nEnter Source Node ID:  ");
+        int srcId = int.parse(stdin.readLineSync().toString());
+        stdout.write("\nEnter Destination Node ID:  ");
+        int destId = int.parse(stdin.readLineSync().toString());
+
+        if (!(Util.idAlreadyPresent(graph, srcId) && Util.idAlreadyPresent(graph, destId))) {
+          throw Exception("Node not present!");
+        }
+
+        graph.addDependency(srcId, destId);
+        print("Dependency added successfully!");
+      } catch (exception) {
+        error = true;
+        print("Invalid input! Try Again.");
+      }
+    } while (error);
+  }
+
+  static void removeNode(Graph graph) {
+    bool error = false;
+    do {
+      try {
+        error = false;
+        stdout.write("\nEnter Node ID to remove:  ");
+        int removeId = int.parse(stdin.readLineSync().toString());
+
+        if (!Util.idAlreadyPresent(graph, removeId)) {
+          throw Exception("Node not found!");
+        }
+
+        graph.deleteNode(removeId);
+        print("Node Deleted successfully");
+      } catch (exception) {
+        error = true;
+        print("Invalid input! Try Again.");
+      }
+    } while (error);
+  }
+
+  static void removeDependency(Graph graph) {
+    bool error = false;
+    do {
+      try {
+        error = false;
+        stdout.write("\nEnter Source Node ID:  ");
+        int srcId = int.parse(stdin.readLineSync().toString());
+        stdout.write("\nEnter Destination Node ID:  ");
+        int destId = int.parse(stdin.readLineSync().toString());
+
+        if (!(Util.idAlreadyPresent(graph, srcId) && Util.idAlreadyPresent(graph, destId))) {
+          throw Exception("Node not present!");
+        }
+
+        graph.deleteDependency(srcId, destId);
+        print("Dependency Deleted Successfully");
+      } catch (exception) {
+        error = true;
+        print("Invalid input! Try Again.");
+      }
+    } while (error);
+  }
+
   static void showChildrens(Graph graph) {}
   static void showParents(Graph graph) {}
   static void showDescendants(Graph graph) {}
