@@ -99,8 +99,79 @@ class GraphDetails {
     } while (error);
   }
 
-  static void showChildrens(Graph graph) {}
-  static void showParents(Graph graph) {}
-  static void showDescendants(Graph graph) {}
-  static void showAncestors(Graph graph) {}
+  static void showChildrens(Graph graph) {
+    bool error = false;
+    do {
+      try {
+        error = false;
+        stdout.write("\nEnter Node ID to view children nodes:  ");
+        int nodeId = int.parse(stdin.readLineSync().toString());
+
+        if (!Util.idAlreadyPresent(graph, nodeId)) {
+          throw Exception("Node not found.");
+        }
+
+        print("$nodeId: ${graph.getImmediateChild(nodeId)}");
+      } catch (exception) {
+        error = true;
+        print("Invalid details. Try Again!");
+      }
+    } while (error);
+  }
+
+  static void showParents(Graph graph) {
+    bool error = false;
+    do {
+      try {
+        error = false;
+        stdout.write("\nEnter Node ID to view children nodes:  ");
+        int nodeId = int.parse(stdin.readLineSync().toString());
+
+        if (!Util.idAlreadyPresent(graph, nodeId)) {
+          throw Exception("Node not found.");
+        }
+
+        print("$nodeId: ${graph.getImmediateParent(nodeId)}");
+      } catch (exception) {
+        error = true;
+        print("Invalid details. Try Again!");
+      }
+    } while (error);
+  }
+
+  static void showDescendants(Graph graph) {
+    bool error = false;
+    do {
+      try {
+        error = false;
+        stdout.write("\nEnter Node ID to view children nodes:  ");
+        int nodeId = int.parse(stdin.readLineSync().toString());
+        if (!Util.idAlreadyPresent(graph, nodeId)) {
+          throw Exception("Node not found.");
+        }
+        print("$nodeId: ${graph.getDescendants(nodeId)}");
+      } catch (exception) {
+        error = true;
+        print("Invalid details. Try Again!");
+      }
+    } while (error);
+  }
+
+  static void showAncestors(Graph graph) {
+    bool error = false;
+    do {
+      try {
+        error = false;
+        stdout.write("\nEnter Node ID to view children nodes:  ");
+        int nodeId = int.parse(stdin.readLineSync().toString());
+        if (!Util.idAlreadyPresent(graph, nodeId)) {
+          throw Exception("Node not found.");
+        }
+        print("$nodeId: ${graph.getAncestors(nodeId)}");
+      } catch (exception) {
+        error = true;
+        print("Invalid details. Try Again!");
+      }
+    } while (error);
+  }
 }
