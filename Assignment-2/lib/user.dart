@@ -10,7 +10,6 @@ class User {
   final List<String> courses;
 
   // Data structure to store students
-  static HashSet registeredRollNumbers = new HashSet<int>();
   static List<User> registeredUsers = [];
 
   // Constant constructur to initialize a User object

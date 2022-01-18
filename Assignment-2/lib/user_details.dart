@@ -83,7 +83,6 @@ class UserDetails {
           final _json = jsonDecode(decodedString);
           User user = User.fromJson(_json);
           User.registeredUsers.add(user);
-          User.registeredRollNumbers.add(user.rollNumber);
         }
       }
     } catch (e) {
