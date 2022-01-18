@@ -8,37 +8,37 @@ import 'user.dart';
 class UserDetails {
   // Function to add users
   static void addUser() {
-    String name;
-    int? age;
-    String address;
-    int? rollNumber;
-    List<String>? courses;
+    String _name;
+    int? _age;
+    String _address;
+    int? _rollNumber;
+    List<String>? _courses;
 
-    name = Util.inputName();
-    age = Util.inputAge();
-    address = Util.inputAddress();
-    rollNumber = Util.inputRollNumber();
-    courses = Util.inputCourses();
+    _name = Util.inputName();
+    _age = Util.inputAge();
+    _address = Util.inputAddress();
+    _rollNumber = Util.inputRollNumber();
+    _courses = Util.inputCourses();
 
     // Make user object from the input data
-    User(name, age ?? 0, address, rollNumber ?? 0, courses ?? []);
+    User(_name, _age ?? 0, _address, _rollNumber ?? 0, _courses ?? []);
   }
 
   // Function to display users
   static void displayUser() {
-    int orderChoice;
-    bool error = false;
+    int _orderChoice;
+    bool _error = false;
 
     // Take a valid input for choice
     do {
-      error = false;
+      _error = false;
       print("\nSelect the order: ");
       print("1. Ascending");
       print("2. Descending");
       stdout.write("Enter your choice:  ");
       try {
-        orderChoice = int.parse(stdin.readLineSync().toString());
-        switch (orderChoice) {
+        _orderChoice = int.parse(stdin.readLineSync().toString());
+        switch (_orderChoice) {
           case 1:
             ViewUser.showAllUsersInAscending();
             break;
@@ -49,20 +49,20 @@ class UserDetails {
             throw Exception("Invalid choice encountered!");
         }
       } catch (exception) {
-        error = true;
+        _error = true;
         print("Invalid choice. Please try again.");
       }
-    } while (error);
+    } while (_error);
   }
 
   // Function to delete user
   static void deleteUser() {
-    int rollNumberToDelete;
+    int _rollNumberToDelete;
     stdout.write("\nEnter the Roll Number of user to delete:   ");
     try {
-      rollNumberToDelete = int.parse(stdin.readLineSync().toString());
-      if (ViewUser.deleteUser(rollNumberToDelete)) {
-        print("User with Roll Number \"$rollNumberToDelete\" deleted!");
+      _rollNumberToDelete = int.parse(stdin.readLineSync().toString());
+      if (ViewUser.deleteUser(_rollNumberToDelete)) {
+        print("User with Roll Number \"$_rollNumberToDelete\" deleted!");
       } else {
         throw Exception("Failed to delete user.");
       }
@@ -73,10 +73,10 @@ class UserDetails {
 
   // Function to load all the Users from memory
   static Future<void> loadUsers() async {
-    final file = File('assets/user_data.txt');
-    Stream<String> lines = file.openRead().transform(utf8.decoder).transform(LineSplitter());
+    final _file = File('assets/user_data.txt');
+    Stream<String> _lines = _file.openRead().transform(utf8.decoder).transform(LineSplitter());
     try {
-      await for (var line in lines) {
+      await for (var line in _lines) {
         if (!line.isEmpty) {
           var decoded = base64.decode(line);
           var decodedString = utf8.decode(decoded);
