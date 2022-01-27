@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/contact_detail/contact_detail.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -6,7 +7,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Contact App',
       theme: _theme(),
-      home: MyApp(),
+      home: ContactDetail(),
     );
   }
 
