@@ -41,9 +41,7 @@ class _ContactsState extends State<Contacts> {
       ),
       body: Container(
         padding: const EdgeInsets.all(5),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
           children: [
             ...contactList.map((contact) => ContactItem(contact)),
           ],
