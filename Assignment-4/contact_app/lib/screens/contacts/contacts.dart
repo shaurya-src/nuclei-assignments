@@ -36,8 +36,13 @@ class _ContactsState extends State<Contacts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const Icon(Icons.people_alt_rounded),
         title: const Text('Contacts'),
         centerTitle: true,
+        backgroundColor: Colors.cyan[700],
+        actions: const [
+          Icon(Icons.more_vert),
+        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(5),
