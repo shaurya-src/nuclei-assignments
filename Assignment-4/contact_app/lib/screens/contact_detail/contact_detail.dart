@@ -2,6 +2,9 @@ import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 
 class ContactDetail extends StatelessWidget {
+  final Contact contactItem;
+  const ContactDetail(this.contactItem, {Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
