@@ -32,8 +32,18 @@ class ContactDetail extends StatelessWidget {
   }
 
   Widget infoBanner(String title, String info, IconData icon) {
+    const double _margin = 10;
+    const double _padding = 15;
     return Container(
-      margin: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(_margin),
+      padding: const EdgeInsets.all(_padding),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        border: Border.all(
+          color: Colors.cyan.shade700,
+          width: 2,
+        ),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
