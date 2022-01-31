@@ -22,6 +22,9 @@ class ContactItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
+          const SizedBox(
+            width: _seperatorSpace,
+          ),
           ClipRRect(
             borderRadius: BorderRadius.circular(_maxHeight),
             child: _getAvatar(contactInfo),
