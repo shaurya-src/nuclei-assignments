@@ -27,7 +27,7 @@ class ContactItem extends StatelessWidget {
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(_maxHeight),
-            child: _getAvatar(contactInfo),
+            child: getAvatar(contactInfo),
           ),
           const SizedBox(
             width: _seperatorSpace,
@@ -49,8 +49,7 @@ class ContactItem extends StatelessWidget {
     );
   }
 
-  Widget _getAvatar(Contact contactInfo) {
-    const double _svgSize = 40;
+  static Widget getAvatar(Contact contactInfo, {double svgSize = 40}) {
     const _path = 'assets/svg/';
     const _extension = '.svg';
 
@@ -67,8 +66,8 @@ class ContactItem extends StatelessWidget {
     return SvgPicture.asset(
       _assetName,
       fit: BoxFit.cover,
-      height: _svgSize,
-      width: _svgSize,
+      height: svgSize,
+      width: svgSize,
     );
   }
 }
