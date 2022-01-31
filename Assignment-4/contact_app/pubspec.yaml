@@ -37,7 +37,6 @@ dependencies:
   hive: ^2.0.5
   contacts_service: ^0.6.3
   permission_handler: ^8.3.0
-  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
