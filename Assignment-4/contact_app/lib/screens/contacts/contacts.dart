@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import './contact_item.dart';
+import '../../app.dart';
 
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
@@ -44,14 +45,19 @@ class _ContactsState extends State<Contacts> {
           Icon(Icons.more_vert),
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(5),
-        child: ListView(
-          children: [
-            ...contactList.map((contact) => ContactItem(contact)),
-          ],
-        ),
-      ),
+      body: ListView(
+          children: contactList
+              .map(
+                (contact) => GestureDetector(
+                  child: ContactItem(contact),
+                  onTap: () => onContactTap(context, contact),
+                ),
+              )
+              .toList()),
     );
+  }
+
+  onContactTap(BuildContext context, Contact contact) {
+    Navigator.pushNamed(context, contactDetailRoute, arguments: {'contact': contact});
   }
 }
