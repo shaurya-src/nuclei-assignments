@@ -1,8 +1,5 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ContactItem extends StatelessWidget {
   final Contact contactInfo;
@@ -49,25 +46,24 @@ class ContactItem extends StatelessWidget {
     );
   }
 
-  static Widget getAvatar(Contact contactInfo, {double svgSize = 40}) {
-    const _path = 'assets/svg/';
-    const _extension = '.svg';
-
-    if (contactInfo.avatar!.isNotEmpty) {
-      Uint8List _avatar = contactInfo.avatar!;
-      return Image.memory(
-        _avatar,
-        fit: BoxFit.cover,
-      );
-    }
-
-    final _firstChar = contactInfo.displayName![0].toUpperCase();
-    String _assetName = _path + _firstChar + _extension;
-    return SvgPicture.asset(
-      _assetName,
-      fit: BoxFit.cover,
-      height: svgSize,
-      width: svgSize,
+  static Widget getAvatar(Contact contactInfo, {double imgSize = 40}) {
+    return Container(
+      width: imgSize,
+      height: imgSize,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+      ),
+      child: (contactInfo.avatar!.isNotEmpty)
+          ? CircleAvatar(
+              backgroundImage: MemoryImage(contactInfo.avatar!),
+            )
+          : CircleAvatar(
+              child: Text(
+                contactInfo.initials(),
+                style: const TextStyle(color: Colors.white),
+              ),
+              backgroundColor: Colors.black,
+            ),
     );
   }
 }
