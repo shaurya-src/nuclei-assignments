@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -37,16 +39,7 @@ class _ContactsState extends State<Contacts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.people_alt_rounded),
-        title: const Text('Contacts'),
-        centerTitle: true,
-        backgroundColor: Colors.cyan[700],
-        actions: const [
-          Icon(Icons.add_circle_outline_rounded),
-          SizedBox(width: 10),
-        ],
-      ),
+      appBar: getAppBar(),
       body: ListView(
         shrinkWrap: true,
         children: [
@@ -75,5 +68,28 @@ class _ContactsState extends State<Contacts> {
 
   onContactTap(BuildContext context, Contact contact) {
     Navigator.pushNamed(context, contactDetailRoute, arguments: {'contact': contact});
+  }
+
+  PreferredSizeWidget? getAppBar() {
+    return AppBar(
+      leading: const Icon(Icons.people_alt_rounded),
+      title: const Text('Contacts'),
+      centerTitle: true,
+      backgroundColor: Colors.cyan[700],
+      actions: [
+        IconButton(
+          onPressed: () async {
+            try {
+              await ContactsService.openContactForm();
+              getAllContacts();
+            } on FormOperationException catch (e) {
+              log("Error: ${e.toString()}");
+            }
+          },
+          icon: const Icon(Icons.add_circle_outline_rounded),
+        ),
+        const SizedBox(width: 10),
+      ],
+    );
   }
 }
