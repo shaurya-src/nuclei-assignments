@@ -47,7 +47,7 @@ class ContactItem extends StatelessWidget {
   }
 
   Widget _getAvatar(Contact contactInfo) {
-    const double _svgSize = 50;
+    const double _svgSize = 40;
     const _path = 'assets/svg/';
     const _extension = '.svg';
 
@@ -59,6 +59,13 @@ class ContactItem extends StatelessWidget {
       );
     }
 
-    return const Text("NA");
+    final _firstChar = contactInfo.displayName![0].toUpperCase();
+    String _assetName = _path + _firstChar + _extension;
+    return SvgPicture.asset(
+      _assetName,
+      fit: BoxFit.cover,
+      height: _svgSize,
+      width: _svgSize,
+    );
   }
 }
