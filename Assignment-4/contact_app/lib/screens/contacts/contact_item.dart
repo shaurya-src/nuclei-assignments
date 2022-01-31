@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ContactItem extends StatelessWidget {
   final Contact contactInfo;
@@ -12,7 +13,6 @@ class ContactItem extends StatelessWidget {
     const double _maxHeight = 70;
     const double _seperatorSpace = 15;
     const double _inPad = 10;
-    String _imgPath = 'assets/images/Tommy.png';
 
     return Container(
       height: _maxHeight,
@@ -20,13 +20,11 @@ class ContactItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(_maxHeight),
-            child: Image.asset(
-              _imgPath,
-              fit: BoxFit.cover,
-            ),
+            child: _getAvatar(contactInfo),
           ),
           const SizedBox(
             width: _seperatorSpace,
@@ -46,5 +44,21 @@ class ContactItem extends StatelessWidget {
       fontWeight: FontWeight.w600,
       fontSize: 18,
     );
+  }
+
+  Widget _getAvatar(Contact contactInfo) {
+    const double _svgSize = 50;
+    const _path = 'assets/svg/';
+    const _extension = '.svg';
+
+    if (contactInfo.avatar!.isNotEmpty) {
+      Uint8List _avatar = contactInfo.avatar!;
+      return Image.memory(
+        _avatar,
+        fit: BoxFit.cover,
+      );
+    }
+
+    return const Text("NA");
   }
 }
