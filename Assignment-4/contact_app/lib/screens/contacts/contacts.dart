@@ -13,6 +13,7 @@ class Contacts extends StatefulWidget {
 
 class _ContactsState extends State<Contacts> {
   List<Contact> contactList = [];
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -49,6 +50,16 @@ class _ContactsState extends State<Contacts> {
       body: ListView(
         shrinkWrap: true,
         children: [
+          Container(
+            padding: const EdgeInsets.all(20),
+            child: TextField(
+              controller: searchController,
+              decoration: const InputDecoration(
+                  labelText: 'Search',
+                  border: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
+                  prefixIcon: Icon(Icons.search, color: Colors.cyan)),
+            ),
+          ),
           ...contactList
               .map(
                 (contact) => GestureDetector(
