@@ -42,18 +42,23 @@ class _ContactsState extends State<Contacts> {
         centerTitle: true,
         backgroundColor: Colors.cyan[700],
         actions: const [
-          Icon(Icons.more_vert),
+          Icon(Icons.add_circle_outline_rounded),
+          SizedBox(width: 10),
         ],
       ),
       body: ListView(
-          children: contactList
+        shrinkWrap: true,
+        children: [
+          ...contactList
               .map(
                 (contact) => GestureDetector(
                   child: ContactItem(contact),
                   onTap: () => onContactTap(context, contact),
                 ),
               )
-              .toList()),
+              .toList(),
+        ],
+      ),
     );
   }
 
