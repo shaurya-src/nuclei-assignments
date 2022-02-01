@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import '../contacts/contact_item.dart';
@@ -13,6 +15,20 @@ class ContactDetail extends StatelessWidget {
     String email = contactItem.emails!.first.value!;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(
+          Icons.update_rounded,
+          size: 30,
+        ),
+        backgroundColor: Colors.cyan[600],
+        onPressed: () async {
+          try {
+            await ContactsService.openExistingContact(contactItem);
+          } on FormOperationException catch (e) {
+            log(e.toString());
+          }
+        },
+      ),
       appBar: AppBar(
         title: const Text(' '),
         backgroundColor: Colors.cyan[700],
@@ -32,7 +48,7 @@ class ContactDetail extends StatelessWidget {
   }
 
   Widget infoBanner(String title, String info, IconData icon) {
-    const double _margin = 10;
+    const double _margin = 5;
     const double _padding = 15;
     return Container(
       margin: const EdgeInsets.all(_margin),
@@ -41,7 +57,6 @@ class ContactDetail extends StatelessWidget {
         color: Colors.grey.shade200,
         border: Border.all(
           color: Colors.cyan.shade700,
-          width: 2,
         ),
       ),
       child: Column(
@@ -72,10 +87,10 @@ class ContactDetail extends StatelessWidget {
   Widget imageBanner(Contact contactInfo) {
     return Container(
       constraints: const BoxConstraints.expand(
-        height: 300,
+        height: 200,
       ),
       decoration: const BoxDecoration(
-        color: Colors.grey,
+        color: Colors.black,
       ),
       child: ContactItem.getAvatar(contactInfo),
     );
@@ -86,6 +101,7 @@ class ContactDetail extends StatelessWidget {
       fontFamily: 'Raleway',
       fontSize: 16,
       fontWeight: FontWeight.w300,
+      letterSpacing: 2,
     );
   }
 
