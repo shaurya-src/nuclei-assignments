@@ -16,22 +16,27 @@ class ContactItem extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: _inPad, top: _inPad),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           const SizedBox(
             width: _seperatorSpace,
           ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(_maxHeight),
-            child: getAvatar(contactInfo),
-          ),
+          getAvatar(contactInfo),
           const SizedBox(
             width: _seperatorSpace,
           ),
-          Text(
-            contactInfo.displayName!,
-            style: _nameStyle(),
+          Container(
+            height: _maxHeight,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // contactInfo.phones![0].value!
+                Text(
+                  contactInfo.displayName!,
+                  style: _nameStyle(),
+                ),
+              ],
+            ),
           ),
           const Spacer(),
           IconButton(
@@ -48,6 +53,16 @@ class ContactItem extends StatelessWidget {
       fontFamily: 'Raleway',
       fontWeight: FontWeight.w600,
       fontSize: 18,
+      letterSpacing: 1.2,
+    );
+  }
+
+  TextStyle _phoneStyle() {
+    return const TextStyle(
+      fontFamily: 'Raleway',
+      fontWeight: FontWeight.w300,
+      fontSize: 14,
+      letterSpacing: 1.5,
     );
   }
 
