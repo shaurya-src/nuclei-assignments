@@ -36,6 +36,14 @@ class _ContactsState extends State<Contacts> {
     });
   }
 
+  searchContacts() async {
+    String _query = "";
+    List<Contact> _searchedContacts = await ContactsService.getContacts(query: _query);
+    setState(() {
+      contactList = _searchedContacts;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
