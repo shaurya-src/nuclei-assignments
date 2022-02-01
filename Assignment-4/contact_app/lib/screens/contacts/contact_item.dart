@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'delete_dialog.dart';
 
 class ContactItem extends StatelessWidget {
   final Contact contactInfo;
@@ -25,7 +26,7 @@ class ContactItem extends StatelessWidget {
           const SizedBox(
             width: _seperatorSpace,
           ),
-          Container(
+          SizedBox(
             height: _maxHeight,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -45,7 +46,9 @@ class ContactItem extends StatelessWidget {
           const Spacer(),
           IconButton(
             icon: const Icon(Icons.delete_forever_rounded),
-            onPressed: deleteContact,
+            onPressed: () {
+              showDeleteDialog(context, contactInfo);
+            },
           )
         ],
       ),
@@ -89,9 +92,5 @@ class ContactItem extends StatelessWidget {
               backgroundColor: Colors.black,
             ),
     );
-  }
-
-  deleteContact() {
-    print("yo");
   }
 }
