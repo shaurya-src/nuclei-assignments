@@ -33,6 +33,11 @@ class ContactItem extends StatelessWidget {
             contactInfo.displayName!,
             style: _nameStyle(),
           ),
+          const Spacer(),
+          IconButton(
+            icon: const Icon(Icons.delete_forever_rounded),
+            onPressed: deleteContact,
+          )
         ],
       ),
     );
@@ -65,5 +70,9 @@ class ContactItem extends StatelessWidget {
               backgroundColor: Colors.black,
             ),
     );
+  }
+
+  deleteContact() {
+    print("yo");
   }
 }
