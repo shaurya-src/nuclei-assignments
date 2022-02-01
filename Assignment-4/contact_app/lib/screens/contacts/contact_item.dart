@@ -47,6 +47,7 @@ class ContactItem extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.delete_forever_rounded),
             onPressed: () {
+              // TODO: Update contact after deletion
               showDeleteDialog(context, contactInfo);
             },
           )
