@@ -29,11 +29,15 @@ class ContactItem extends StatelessWidget {
             height: _maxHeight,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // contactInfo.phones![0].value!
                 Text(
                   contactInfo.displayName!,
                   style: _nameStyle(),
+                ),
+                Text(
+                  contactInfo.phones![0].value!,
+                  style: _phoneStyle(),
                 ),
               ],
             ),
