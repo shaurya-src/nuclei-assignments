@@ -18,6 +18,7 @@ class _ContactsState extends State<Contacts> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Make SearchWidget Unscrollable
     return Scaffold(
       appBar: getAppBar(),
       body: SingleChildScrollView(
