@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'screens/contacts/view_model/contacts_provider.dart';
 import 'screens/contacts/contacts.dart';
 import 'screens/contact_detail/contact_detail.dart';
 
@@ -21,7 +24,11 @@ class MyApp extends StatelessWidget {
 
       switch (settings.name) {
         case contactsRoute:
-          screen = const Contacts();
+          // screen = const Contacts();
+          screen = ChangeNotifierProvider<ContactsProvider>(
+            create: (context) => ContactsProvider(),
+            child: const Contacts(),
+          );
           break;
         case contactDetailRoute:
           screen = ContactDetail(arguments!['contact']);
