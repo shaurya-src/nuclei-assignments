@@ -13,11 +13,12 @@ class ContactList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<ContactsProvider>(builder: (context, provider, child) {
-      // Get permission and load all contacts
+      ScrollController _controller = ScrollController();
       provider.getPermission();
 
       // Return list of all contacts
       return ListView(
+        controller: _controller,
         shrinkWrap: true,
         children: provider.contactList
             .map(
