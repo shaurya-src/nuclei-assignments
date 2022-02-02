@@ -8,7 +8,7 @@ class ContactsProvider extends ChangeNotifier {
 
   // Initial method to get permission
   void getPermission() async {
-    if (await Permission.contacts.request().isGranted) {
+    if (await Permission.contacts.request().isGranted && !_isContactLoaded) {
       getAllContacts();
       notifyListeners();
     }
@@ -19,6 +19,13 @@ class ContactsProvider extends ChangeNotifier {
     List<Contact> _contacts = (await ContactsService.getContacts()).toList();
     _contactList = _contacts;
     _isContactLoaded = true;
+    notifyListeners();
+  }
+
+  // Method to delete contact
+  void deleteContact(Contact contactInfo) async {
+    await ContactsService.deleteContact(contactInfo);
+    getAllContacts();
     notifyListeners();
   }
 
