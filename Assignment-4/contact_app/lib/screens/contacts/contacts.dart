@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'widget/contact_item.dart';
+import 'package:provider/provider.dart';
+
 import '../../app.dart';
+import 'view_model/contacts_provider.dart';
+import 'widget/contact_item.dart';
 
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
@@ -48,35 +51,16 @@ class _ContactsState extends State<Contacts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: getAppBar(),
-      body: ListView(
-        shrinkWrap: true,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(20),
-            child: TextField(
-              controller: searchController,
-              decoration: const InputDecoration(
-                  labelText: 'Search',
-                  border: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
-                  prefixIcon: Icon(Icons.search, color: Colors.cyan)),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _getSearchWidget(),
+            _getContactList(
+              context,
             ),
-          ),
-          ...contactList
-              .map(
-                (contact) => GestureDetector(
-                  child: ContactItem(contact),
-                  // onTap: () => onContactTap(context, contact),
-                  onTap: () async {
-                    try {
-                      await ContactsService.openExistingContact(contact);
-                    } on FormOperationException catch (e) {
-                      log(e.toString());
-                    }
-                  },
-                ),
-              )
-              .toList(),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -106,5 +90,41 @@ class _ContactsState extends State<Contacts> {
         const SizedBox(width: 10),
       ],
     );
+  }
+
+  Widget _getSearchWidget() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: TextField(
+        controller: searchController,
+        decoration: const InputDecoration(
+            labelText: 'Search',
+            border: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
+            prefixIcon: Icon(Icons.search, color: Colors.cyan)),
+      ),
+    );
+  }
+
+  Widget _getContactList(BuildContext context) {
+    return Consumer<ContactsProvider>(builder: (context, provider, child) {
+      return ListView(
+        shrinkWrap: true,
+        children: contactList
+            .map(
+              (contact) => GestureDetector(
+                child: ContactItem(contact),
+                // onTap: () => onContactTap(context, contact),
+                onTap: () async {
+                  try {
+                    await ContactsService.openExistingContact(contact);
+                  } on FormOperationException catch (e) {
+                    log(e.toString());
+                  }
+                },
+              ),
+            )
+            .toList(),
+      );
+    });
   }
 }
