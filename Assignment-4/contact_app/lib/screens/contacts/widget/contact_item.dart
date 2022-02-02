@@ -11,6 +11,7 @@ class ContactItem extends StatelessWidget {
     const double _maxHeight = 70;
     const double _seperatorSpace = 15;
     const double _inPad = 10;
+    const String? _noPhone = "NA";
 
     return Container(
       height: _maxHeight,
@@ -37,7 +38,7 @@ class ContactItem extends StatelessWidget {
                   style: _nameStyle(),
                 ),
                 Text(
-                  contactInfo.phones![0].value!,
+                  (contactInfo.phones!.isNotEmpty) ? contactInfo.phones![0].value! : _noPhone,
                   style: _phoneStyle(),
                 ),
               ],
@@ -47,7 +48,6 @@ class ContactItem extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.delete_forever_rounded),
             onPressed: () {
-              // TODO: Update contact after deletion
               showDeleteDialog(context, contactInfo);
             },
           )
