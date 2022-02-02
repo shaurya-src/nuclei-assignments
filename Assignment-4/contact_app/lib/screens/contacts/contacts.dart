@@ -1,13 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'dart:developer';
 
-import '../../app.dart';
 import 'view_model/contacts_provider.dart';
-import 'widget/contact_item.dart';
+import 'widget/contact_list.dart';
 
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
@@ -17,35 +14,7 @@ class Contacts extends StatefulWidget {
 }
 
 class _ContactsState extends State<Contacts> {
-  List<Contact> contactList = [];
   TextEditingController searchController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    getPermissions();
-  }
-
-  getPermissions() async {
-    if (await Permission.contacts.request().isGranted) {
-      getAllContacts();
-    }
-  }
-
-  getAllContacts() async {
-    List<Contact> _contacts = (await ContactsService.getContacts()).toList();
-    setState(() {
-      contactList = _contacts;
-    });
-  }
-
-  searchContacts() async {
-    String _query = "";
-    List<Contact> _searchedContacts = await ContactsService.getContacts(query: _query);
-    setState(() {
-      contactList = _searchedContacts;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,17 +25,11 @@ class _ContactsState extends State<Contacts> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _getSearchWidget(),
-            _getContactList(
-              context,
-            ),
+            const ContactList(),
           ],
         ),
       ),
     );
-  }
-
-  onContactTap(BuildContext context, Contact contact) {
-    Navigator.pushNamed(context, contactDetailRoute, arguments: {'contact': contact});
   }
 
   PreferredSizeWidget? getAppBar() {
@@ -76,19 +39,27 @@ class _ContactsState extends State<Contacts> {
       centerTitle: true,
       backgroundColor: Colors.cyan[700],
       actions: [
-        IconButton(
+        _getNewContactWidget(),
+        const SizedBox(width: 10),
+      ],
+    );
+  }
+
+  Widget _getNewContactWidget() {
+    return Consumer<ContactsProvider>(
+      builder: (context, provider, child) {
+        return IconButton(
           onPressed: () async {
             try {
               await ContactsService.openContactForm();
-              getAllContacts();
+              provider.getAllContacts();
             } on FormOperationException catch (e) {
               log("Error: ${e.toString()}");
             }
           },
           icon: const Icon(Icons.add_circle_outline_rounded),
-        ),
-        const SizedBox(width: 10),
-      ],
+        );
+      },
     );
   }
 
@@ -103,28 +74,5 @@ class _ContactsState extends State<Contacts> {
             prefixIcon: Icon(Icons.search, color: Colors.cyan)),
       ),
     );
-  }
-
-  Widget _getContactList(BuildContext context) {
-    return Consumer<ContactsProvider>(builder: (context, provider, child) {
-      return ListView(
-        shrinkWrap: true,
-        children: contactList
-            .map(
-              (contact) => GestureDetector(
-                child: ContactItem(contact),
-                // onTap: () => onContactTap(context, contact),
-                onTap: () async {
-                  try {
-                    await ContactsService.openExistingContact(contact);
-                  } on FormOperationException catch (e) {
-                    log(e.toString());
-                  }
-                },
-              ),
-            )
-            .toList(),
-      );
-    });
   }
 }
