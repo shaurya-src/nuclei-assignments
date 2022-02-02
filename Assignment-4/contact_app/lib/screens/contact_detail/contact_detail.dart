@@ -34,15 +34,17 @@ class ContactDetail extends StatelessWidget {
         backgroundColor: Colors.cyan[700],
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          imageBanner(contactItem),
-          infoBanner('Name', name, Icons.people_alt_rounded),
-          infoBanner('Phone', phone, Icons.phone_android_rounded),
-          infoBanner('E-Mail', email, Icons.email_rounded),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            imageBanner(contactItem),
+            infoBanner('Name', name, Icons.people_alt_rounded),
+            infoBanner('Phone', phone, Icons.phone_android_rounded),
+            infoBanner('E-Mail', email, Icons.email_rounded),
+          ],
+        ),
       ),
     );
   }
