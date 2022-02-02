@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
-import '../contacts/contact_item.dart';
+import '../contacts/widget/contact_item.dart';
 
 class ContactDetail extends StatelessWidget {
   final Contact contactItem;

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:permission_handler/permission_handler.dart';
-import './contact_item.dart';
+import 'widget/contact_item.dart';
 import '../../app.dart';
 
 class Contacts extends StatefulWidget {
