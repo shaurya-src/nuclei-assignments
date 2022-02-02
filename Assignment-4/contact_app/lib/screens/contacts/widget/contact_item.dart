@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
-import 'delete_dialog.dart';
+import 'delete_button.dart';
 
 class ContactItem extends StatelessWidget {
   final Contact contactInfo;
@@ -28,12 +28,7 @@ class ContactItem extends StatelessWidget {
           ),
           _getContactPreview(_maxHeight),
           const Spacer(),
-          IconButton(
-            icon: const Icon(Icons.delete_forever_rounded),
-            onPressed: () async {
-              showDeleteDialog(context, contactInfo);
-            },
-          )
+          DeleteButton(contactInfo),
         ],
       ),
     );
