@@ -65,7 +65,14 @@ class _ContactsState extends State<Contacts> {
               .map(
                 (contact) => GestureDetector(
                   child: ContactItem(contact),
-                  onTap: () => onContactTap(context, contact),
+                  // onTap: () => onContactTap(context, contact),
+                  onTap: () async {
+                    try {
+                      await ContactsService.openExistingContact(contact);
+                    } on FormOperationException catch (e) {
+                      log(e.toString());
+                    }
+                  },
                 ),
               )
               .toList(),
