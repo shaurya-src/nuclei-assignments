@@ -11,7 +11,6 @@ class ContactItem extends StatelessWidget {
     const double _maxHeight = 70;
     const double _seperatorSpace = 15;
     const double _inPad = 10;
-    const String? _noPhone = "NA";
 
     return Container(
       height: _maxHeight,
@@ -27,27 +26,11 @@ class ContactItem extends StatelessWidget {
           const SizedBox(
             width: _seperatorSpace,
           ),
-          SizedBox(
-            height: _maxHeight,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  contactInfo.displayName!,
-                  style: _nameStyle(),
-                ),
-                Text(
-                  (contactInfo.phones!.isNotEmpty) ? contactInfo.phones![0].value! : _noPhone,
-                  style: _phoneStyle(),
-                ),
-              ],
-            ),
-          ),
+          _getContactPreview(_maxHeight),
           const Spacer(),
           IconButton(
             icon: const Icon(Icons.delete_forever_rounded),
-            onPressed: () {
+            onPressed: () async {
               showDeleteDialog(context, contactInfo);
             },
           )
@@ -92,6 +75,26 @@ class ContactItem extends StatelessWidget {
               ),
               backgroundColor: Colors.black,
             ),
+    );
+  }
+
+  Widget _getContactPreview(double maxHeight) {
+    return SizedBox(
+      height: maxHeight,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            contactInfo.displayName!,
+            style: _nameStyle(),
+          ),
+          Text(
+            (contactInfo.phones!.isNotEmpty) ? contactInfo.phones![0].value! : "NA",
+            style: _phoneStyle(),
+          ),
+        ],
+      ),
     );
   }
 }

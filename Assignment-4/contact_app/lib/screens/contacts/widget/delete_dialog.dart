@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:provider/provider.dart';
+
+import '../view_model/contacts_provider.dart';
 
 Future<void> showDeleteDialog(BuildContext context, Contact contactInfo) async {
   return showDialog<void>(
     context: context,
-    barrierDismissible: false, // user must tap button!
+    barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
@@ -22,27 +25,39 @@ Future<void> showDeleteDialog(BuildContext context, Contact contactInfo) async {
           ),
         ),
         actions: [
-          TextButton(
-            child: Text(
-              'Confirm',
-              style: _alertText(FontWeight.w600),
-            ),
-            onPressed: () async {
-              await ContactsService.deleteContact(contactInfo);
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            child: Text(
-              'Cancel',
-              style: _alertText(FontWeight.w600),
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
+          _getConfirmButton(context, contactInfo),
+          _getCancelButton(context),
         ],
       );
+    },
+  );
+}
+
+Widget _getConfirmButton(BuildContext context, Contact contactInfo) {
+  return Consumer<ContactsProvider>(
+    builder: (context, provider, child) {
+      return TextButton(
+        child: Text(
+          'Confirm',
+          style: _alertText(FontWeight.w600),
+        ),
+        onPressed: () async {
+          Navigator.of(context).pop();
+          provider.deleteContact(contactInfo);
+        },
+      );
+    },
+  );
+}
+
+Widget _getCancelButton(BuildContext context) {
+  return TextButton(
+    child: Text(
+      'Cancel',
+      style: _alertText(FontWeight.w600),
+    ),
+    onPressed: () {
+      Navigator.of(context).pop();
     },
   );
 }
