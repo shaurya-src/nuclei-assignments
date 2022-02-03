@@ -14,13 +14,13 @@ class DeleteButton extends StatelessWidget {
       builder: (context, provider, child) {
         return IconButton(
           icon: const Icon(Icons.delete_forever_rounded),
-          onPressed: () => _showDeleteDialog(context),
+          onPressed: () => _showDeleteDialog(context, provider),
         );
       },
     );
   }
 
-  Future<void> _showDeleteDialog(BuildContext context) {
+  Future<void> _showDeleteDialog(BuildContext context, ContactsProvider provider) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -34,7 +34,7 @@ class DeleteButton extends StatelessWidget {
             style: _alertText(FontWeight.w300),
           ),
           actions: [
-            _getConfirmButton(context),
+            _getConfirmButton(context, provider),
             _getCancelButton(context),
           ],
         );
@@ -42,13 +42,15 @@ class DeleteButton extends StatelessWidget {
     );
   }
 
-  Widget _getConfirmButton(BuildContext context) {
+  Widget _getConfirmButton(BuildContext context, ContactsProvider provider) {
     return TextButton(
       child: Text(
         "Confirm",
         style: _alertText(FontWeight.w600),
       ),
-      onPressed: () => Navigator.of(context).pop(),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
     );
   }
 
