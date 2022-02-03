@@ -6,15 +6,8 @@ import 'dart:developer';
 import 'view_model/contacts_provider.dart';
 import 'widget/contact_list.dart';
 
-class Contacts extends StatefulWidget {
+class Contacts extends StatelessWidget {
   const Contacts({Key? key}) : super(key: key);
-
-  @override
-  _ContactsState createState() => _ContactsState();
-}
-
-class _ContactsState extends State<Contacts> {
-  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +58,7 @@ class _ContactsState extends State<Contacts> {
   }
 
   Widget _getSearchWidget() {
+    TextEditingController searchController = TextEditingController();
     return Container(
       padding: const EdgeInsets.all(20),
       child: TextField(
