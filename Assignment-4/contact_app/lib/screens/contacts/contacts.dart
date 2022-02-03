@@ -61,12 +61,14 @@ class Contacts extends StatelessWidget {
     TextEditingController searchController = TextEditingController();
     return Container(
       padding: const EdgeInsets.all(20),
-      child: TextField(
-        controller: searchController,
-        decoration: const InputDecoration(
-            labelText: 'Search',
-            border: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
-            prefixIcon: Icon(Icons.search, color: Colors.cyan)),
+      child: Consumer<ContactsProvider>(
+        builder: (context, provider, child) => TextField(
+          controller: searchController,
+          decoration: const InputDecoration(
+              labelText: 'Search',
+              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
+              prefixIcon: Icon(Icons.search, color: Colors.cyan)),
+        ),
       ),
     );
   }
