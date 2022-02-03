@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
+import 'package:provider/provider.dart';
+
+import '../view_model/contacts_provider.dart';
 
 class DeleteButton extends StatelessWidget {
   final Contact contactInfo;
@@ -18,9 +21,13 @@ class DeleteButton extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Cofirm Contact Deletion"),
+          title: Text(
+            "Cofirm Contact Deletion",
+            style: _alertText(FontWeight.w700),
+          ),
           content: Text(
-            "Do you really want to delete this contact: ${contactInfo.displayName}? ",
+            "Do you really want to delete this contact: ${contactInfo.displayName} ? ",
+            style: _alertText(FontWeight.w300),
           ),
           actions: [
             _getConfirmButton(context),
@@ -33,15 +40,29 @@ class DeleteButton extends StatelessWidget {
 
   Widget _getConfirmButton(BuildContext context) {
     return TextButton(
-      child: const Text("Confirm"),
+      child: Text(
+        "Confirm",
+        style: _alertText(FontWeight.w600),
+      ),
       onPressed: () => Navigator.of(context).pop(),
     );
   }
 
   Widget _getCancelButton(BuildContext context) {
     return TextButton(
-      child: const Text("Cancel"),
+      child: Text(
+        "Cancel",
+        style: _alertText(FontWeight.w600),
+      ),
       onPressed: () => Navigator.of(context).pop(),
+    );
+  }
+
+  TextStyle _alertText(FontWeight weight) {
+    return TextStyle(
+      fontFamily: 'Raleway',
+      letterSpacing: 1.2,
+      fontWeight: weight,
     );
   }
 }
