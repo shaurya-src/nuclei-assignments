@@ -10,12 +10,13 @@ class DeleteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ContactsProvider>(
-      create: (context) => ContactsProvider(),
-      child: IconButton(
-        icon: const Icon(Icons.delete_forever_rounded),
-        onPressed: () => _showDeleteDialog(context),
-      ),
+    return Consumer<ContactsProvider>(
+      builder: (context, provider, child) {
+        return IconButton(
+          icon: const Icon(Icons.delete_forever_rounded),
+          onPressed: () => _showDeleteDialog(context),
+        );
+      },
     );
   }
 
