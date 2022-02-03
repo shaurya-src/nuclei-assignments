@@ -49,6 +49,7 @@ class DeleteButton extends StatelessWidget {
         style: _alertText(FontWeight.w600),
       ),
       onPressed: () {
+        provider.deleteContact(contactInfo);
         Navigator.of(context).pop();
       },
     );
