@@ -30,9 +30,8 @@ class ContactsProvider extends ChangeNotifier {
   }
 
   // Search Contacts
-  void searchContacts() async {
-    String _query = "";
-    List<Contact> _searchedContacts = await ContactsService.getContacts(query: _query);
+  void searchContacts(String queryString) async {
+    List<Contact> _searchedContacts = await ContactsService.getContacts(query: queryString);
     _contactList = _searchedContacts;
     notifyListeners();
   }
