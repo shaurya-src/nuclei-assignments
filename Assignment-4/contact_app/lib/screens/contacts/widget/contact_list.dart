@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'dart:developer';
 
-import '../../../app.dart';
 import '../view_model/contacts_provider.dart';
 import 'contact_item.dart';
 

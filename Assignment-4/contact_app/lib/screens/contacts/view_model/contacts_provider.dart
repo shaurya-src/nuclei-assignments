@@ -4,8 +4,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../model/user_contact.dart';
-
 class ContactsProvider extends ChangeNotifier {
   List<Contact> _contactList = [];
   bool _isContactLoaded = false;
