@@ -12,7 +12,7 @@ class ContactsProvider extends ChangeNotifier {
   // Initial method to get permission
   void getPermission() async {
     if (await Permission.contacts.request().isGranted && !_isContactLoaded) {
-      loadContactsToCache();
+      // loadContactsToCache();
       getAllContacts();
       notifyListeners();
     }
