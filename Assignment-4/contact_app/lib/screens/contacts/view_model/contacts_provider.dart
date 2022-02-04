@@ -14,7 +14,7 @@ class ContactsProvider extends ChangeNotifier {
   // Initial method to get permission
   void getPermission() async {
     if (await Permission.contacts.request().isGranted && !_isContactLoaded) {
-      // loadContactsToCache();
+      loadContactsToCache();
       getAllContacts();
       notifyListeners();
     }
@@ -24,20 +24,7 @@ class ContactsProvider extends ChangeNotifier {
     List<Contact> _contacts = (await ContactsService.getContacts()).toList();
 
     for (Contact contact in _contacts) {
-      String _name = contact.displayName!;
-      String _phone;
-      if (contact.phones!.isEmpty) {
-        _phone = "NA";
-      } else {
-        _phone = contact.phones!.first.value.toString();
-      }
-
-      final userContact = UserContact()
-        ..contact = contact
-        ..name = _name
-        ..phoneNumber = _phone;
-
-      Hive.box<UserContact>('contactsBox').add(userContact);
+      Hive.box<Contact>('contactsBox').add(contact);
     }
 
     _isContactCached = true;
