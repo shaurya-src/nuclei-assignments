@@ -11,17 +11,18 @@ class Contacts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Make SearchWidget Unscrollable
     return Scaffold(
       appBar: getAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            _getSearchWidget(),
-            const ContactList(),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          _getSearchWidget(),
+          const Expanded(
+            child: SingleChildScrollView(
+              child: ContactList(),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -59,7 +60,10 @@ class Contacts extends StatelessWidget {
 
   Widget _getSearchWidget() {
     final TextEditingController searchController = TextEditingController();
+    const double _searchWidgetHeight = 100;
+
     return Container(
+      height: _searchWidgetHeight,
       padding: const EdgeInsets.all(20),
       child: Consumer<ContactsProvider>(
         builder: (context, provider, child) => TextField(
