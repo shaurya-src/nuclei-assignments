@@ -24,7 +24,6 @@ class ContactList extends StatelessWidget {
             .map(
               (contact) => GestureDetector(
                 child: ContactItem(contact),
-                // onTap: () => onContactTap(context, contact),
                 onTap: () async {
                   try {
                     await ContactsService.openExistingContact(contact);
@@ -37,10 +36,5 @@ class ContactList extends StatelessWidget {
             .toList(),
       );
     });
-  }
-
-  // Navigate to ContactDetails page
-  onContactTap(BuildContext context, Contact contact) {
-    Navigator.pushNamed(context, contactDetailRoute, arguments: {'contact': contact});
   }
 }

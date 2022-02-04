@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'screens/contacts/view_model/contacts_provider.dart';
 import 'screens/contacts/contacts.dart';
-import 'screens/contact_detail/contact_detail.dart';
 
 const contactsRoute = '/';
 const contactDetailRoute = '/contact_detail';
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   RouteFactory _routes() {
     return (settings) {
-      final arguments = settings.arguments as Map<String, dynamic>?;
+      // final arguments = settings.arguments as Map<String, dynamic>?;
       Widget screen;
 
       switch (settings.name) {
@@ -31,9 +30,6 @@ class MyApp extends StatelessWidget {
             create: (context) => ContactsProvider(),
             child: const Contacts(),
           );
-          break;
-        case contactDetailRoute:
-          screen = ContactDetail(arguments!['contact']);
           break;
         default:
           return null;
