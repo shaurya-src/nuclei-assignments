@@ -8,9 +8,8 @@ import './app.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  // Hive.registerAdapter(UserContactAdapter());
   Hive.registerAdapter(ContactAdapter());
-  // await Hive.openBox<UserContact>('contactsBox');
+
   await Hive.openBox<Contact>('contactsBox');
 
   runApp(const MyApp());

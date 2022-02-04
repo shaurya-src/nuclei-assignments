@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
 
       switch (settings.name) {
         case contactsRoute:
-          // screen = const Contacts();
           screen = ChangeNotifierProvider<ContactsProvider>(
             create: (context) => ContactsProvider(),
             child: const Contacts(),
